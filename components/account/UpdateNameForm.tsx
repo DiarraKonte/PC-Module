@@ -1,4 +1,3 @@
-// UpdateNameForm.tsx
 'use client';
 import { useState } from 'react';
 import { User, updateProfile } from 'firebase/auth';
@@ -12,25 +11,17 @@ export default function UpdateName({ user }: Props) {
   const [displayName, setDisplayName] = useState(user?.displayName || '');
   const [isLoading, setIsLoading] = useState(false);
 
-  const validateName = () => {
-    if (!displayName.trim()) {
-      toast.error('Le nom ne peut pas être vide');
-      return false;
-    }
-    return true;
-  };
-
   const handleUpdateName = async () => {
-    if (!user || !validateName()) return;
-    
+    if (!user) return;
+
     setIsLoading(true);
     
     try {
       await updateProfile(user, { displayName });
-      toast.success('Nom mis à jour avec succès !');
+      toast.success('Nom mis à jour !');
     } catch (error) {
       console.error(error);
-      toast.error('Erreur lors de la mise à jour du nom');
+      toast.error("Erreur lors de la mise à jour du nom.");
     } finally {
       setIsLoading(false);
     }
@@ -54,15 +45,13 @@ export default function UpdateName({ user }: Props) {
             className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700"
             aria-describedby="name-help"
           />
-          <p id="name-help" className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-            Ce nom sera visible pour les autres utilisateurs
-          </p>
+        
         </div>
 
         <button
           onClick={handleUpdateName}
           disabled={isLoading}
-          className={`px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors ${
+          className={`px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none transition-colors ${
             isLoading ? 'opacity-70 cursor-not-allowed' : ''
           }`}
         >

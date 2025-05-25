@@ -1,0 +1,88 @@
+"use client"
+import React from 'react';
+import NavBar from '@/components/navigation/HomeNavBar';
+import { useAuth } from '@/lib/AuthContext';
+import StripePaymentButton from '@/components/button/StripePaymentButton';
+
+export default function Pricing() {
+  const { isAuthenticated, loading } = useAuth();
+
+  const plan = {
+    name: 'Accès à vie',
+    price: '19€',
+    description: 'Un paiement unique pour débloquer tous les modules.',
+    features: [
+      'Accès complet à tous les modules',
+      'Mises à jour incluses',
+      'Support prioritaire'
+    ],
+  };
+
+  if (loading) {
+    return (
+      <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900">
+        <NavBar />
+        <main className="flex-1 flex items-center justify-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        </main>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
+      <NavBar />
+
+      <main className="flex-1 py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text dark:from-blue-400 dark:to-purple-400">
+            Offre Unique
+          </h1>
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-12">
+            Un seul paiement. Aucun abonnement. Accès illimité à tous les modules.
+          </p>
+
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-8">
+            <h2 className="text-2xl font-bold mb-2">{plan.name}</h2>
+            <p className="text-gray-600 dark:text-gray-400 mb-4">{plan.description}</p>
+            <div className="text-4xl font-extrabold mb-6">{plan.price}</div>
+
+            <ul className="space-y-3 mb-8 text-left">
+              {plan.features.map((feature, i) => (
+                <li key={i} className="flex items-start">
+                  <svg
+                    className="w-5 h-5 text-green-500 mt-0.5 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            <StripePaymentButton
+              productId="prod_SNVnV69EEnT4OE"
+              price={1900}
+              buttonText={isAuthenticated ? "Obtenir l'accès maintenant" : "Se connecter pour acheter"}
+            />
+
+            {!isAuthenticated && (
+              <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+                Vous avez déjà un compte?{' '}
+                <a 
+                  href="/account/login" 
+                  className="text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  Connectez-vous
+                </a>
+              </p>
+            )}
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}

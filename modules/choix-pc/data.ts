@@ -5,7 +5,9 @@ export default {
     title: "Bien choisir son PC gaming",
     icon: "🎮",
     description: "Apprends à définir tes besoins pour un setup parfaitement adapté à ton style de jeu.",
-    image: "/images/ChoosePc.png"
+    image: "/images/ChoosePc.png",
+    price: 0, // 0 signifie gratuit
+    duration: "1h 30min", // Ajout de la durée
   },
   lessons: [
     {

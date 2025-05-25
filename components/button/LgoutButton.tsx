@@ -2,7 +2,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { signOut } from 'firebase/auth';
-import { auth } from '@/app/account/firebase/firebase';
+import { auth } from '@/lib/firebase/firebase';
 import { LogOut } from 'lucide-react';
 
 export default function LogoutButton() {
@@ -11,7 +11,7 @@ export default function LogoutButton() {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      router.push('/login');
+      router.push('/');
       router.refresh();
     } catch (error) {
       console.error('Erreur lors de la déconnexion :', error);

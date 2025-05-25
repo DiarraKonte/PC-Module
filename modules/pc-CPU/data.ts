@@ -6,7 +6,9 @@ export default {
     description:
       "Décrypte les specs techniques et trouve le CPU parfait pour ton budget et tes besoins !",
     image: "",
-
+    difficulty: "débutant",
+    author: "Tech Gaming Pro",
+    price: 29.99,
   },
   lessons: [
     {

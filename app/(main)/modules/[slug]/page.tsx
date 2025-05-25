@@ -3,7 +3,7 @@
 import { notFound } from 'next/navigation';
 import { getModule } from '@/modules';
 import LessonList from '@/components/modules/Modulelist';
-import NavBar from '@/components/navigation/NavBar';
+import NavBar from '@/components/navigation/HomeNavBar';
 import { Sidebar } from '@/components/navigation/SideBar';
 import { useState } from 'react';
 import ProtectedRoute from '@/components/Protected/PretotectedRoute';
@@ -13,14 +13,16 @@ export default function ModulePage({ params }: { params: { slug: string } }) {
   const module = getModule(params.slug);
   if (!module) return notFound();
 
+  const isFree= module.meta.price === 0;
+
   return (
-    <ProtectedRoute>
+    <ProtectedRoute isFree={isFree}>
        <div className="flex flex-col min-h-screen">
       <NavBar />
       
       <div className="flex flex-1">
         <Sidebar
-          currentLessonSlug={undefined} // Aucune leçon sélectionnée sur cette page
+          currentLessonSlug={undefined} 
           isOpen={isSidebarOpen}
           onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
           lessons={[...module.lessons]}

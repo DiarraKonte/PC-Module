@@ -20,16 +20,14 @@ type SidebarProps = {
 export function Sidebar({ currentLessonSlug, isOpen, onToggle, lessons, moduleMeta }: SidebarProps) {
   const currentIndex = lessons.findIndex(l => l.slug === currentLessonSlug);
 
-  // Fermer le sidebar quand on clique sur un lien en mode mobile
   const handleLinkClick = () => {
-    if (window.innerWidth < 768) {
+    if (window.innerWidth < 1024) {
       onToggle();
     }
   };
 
-  // Empêcher le défilement du body quand le sidebar est ouvert
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && window.innerWidth < 1024) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -42,7 +40,6 @@ export function Sidebar({ currentLessonSlug, isOpen, onToggle, lessons, moduleMe
 
   return (
     <>
-      {/* Overlay pour mobile */}
       {isOpen && (
         <div 
           className="fixed inset-0 bg-black/50 z-40 md:hidden"
@@ -51,11 +48,10 @@ export function Sidebar({ currentLessonSlug, isOpen, onToggle, lessons, moduleMe
       )}
 
       <aside
-        className={`fixed md:relative z-50 w-72 bg-white dark:bg-gray-900 p-6 border-r dark:border-gray-700 shadow-lg dark:shadow-none transition-all duration-300 ease-in-out ${
-          isOpen ? 'left-0' : '-left-full md:left-0'
-        } h-screen overflow-y-auto`}
+        className={`fixed md:sticky top-0 z-50 w-72 bg-white dark:bg-gray-900 p-6 border-r dark:border-gray-700 shadow-lg dark:shadow-none transition-transform duration-300 ease-in-out ${
+          isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+        } h-[calc(100vh-4rem)] md:h-screen overflow-y-auto`}
       >
-        {/* Bouton fermer pour mobile */}
         <button
           onClick={onToggle}
           className="md:hidden absolute top-4 right-4 p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"

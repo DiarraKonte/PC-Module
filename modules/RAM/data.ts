@@ -5,6 +5,9 @@ export default {
     icon: "memory",
     description: "Apprenez à comprendre et à choisir la quantité de RAM idéale pour votre ordinateur",
     image: "/images/ram-modules.jpg",
+    difficulty: "débutant",
+    author: "Tech Gaming Pro",
+    price: 29.99,
   },
   lessons: [
     {

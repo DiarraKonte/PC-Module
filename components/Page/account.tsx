@@ -1,18 +1,22 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { auth } from '@/app/account/firebase/firebase';
+import { auth } from '@/lib/firebase/firebase';
 import { onAuthStateChanged, signOut, User } from 'firebase/auth';
 import DisplayUser from '@/components/account/ProfileCard';
 import UpdateName from '@/components/account/UpdateNameForm';
 import UpdatePassword from '@/components/account/UpdatePasswordForm';
 import { toast } from 'react-hot-toast';
-import NavBar from '@/components/navigation/HomeNavBar'; 
+import NavBar from '@/components/navigation/HomeNavBar';
+import { useAuth } from '@/lib/AuthContext'; 
+import { Crown } from 'lucide-react';
+
 
 export default function AccountPage() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const { hasPremiumAccess } = useAuth(); 
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
@@ -48,34 +52,57 @@ export default function AccountPage() {
     );
   }
 
+  if (!user) {
+    return null;
+  }
+
   return (
     <>
-      {/* ✅ Navbar en haut de page */}
       <NavBar />
       
-      {/* Contenu principal */}
       <main className="container mx-auto px-4 py-8 max-w-3xl">
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8">
-          <h1 className="text-3xl font-bold mb-6 text-center">Mon compte</h1>
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
+          <h1 className="text-3xl font-bold text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">
+            Mon compte
+          </h1>
+
+          <div className="flex flex-col items-center justify-center mb-8">
+            <div className="w-20 h-20 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mb-4">
+              <span className="text-2xl font-bold text-blue-600">
+                {user.displayName?.charAt(0) || 'U'}
+              </span>
+            </div>
+            <h2 className="text-xl font-semibold">{user.displayName || 'Utilisateur'}</h2>
+            <p className="text-gray-500 dark:text-gray-400">{user.email}</p>
+
+            {hasPremiumAccess && (
+              <div className='flex'>
+                 <Crown className="w-4 h-4 text-yellow-500 mr-1" />
+                <span className="text-xs text-yellow-600 dark:text-yellow-400">Compte Premium</span>
+              </div>
+            
+
+            )}
+          </div>
+
           <DisplayUser user={user} />
         </div>
 
         <div className="space-y-8">
           <UpdateName user={user} />
           <UpdatePassword user={user} />
-          
-          <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+
+          <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">Déconnexion</h2>
             <p className="text-gray-600 dark:text-gray-300 mb-4">
+              Vous pouvez vous déconnecter à tout moment.
             </p>
-            <div className="flex justify-center">
-              <button
-                onClick={handleLogout}
-                className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors"
-              >
-                Se déconnecter
-              </button>
-            </div>
+            <button
+              onClick={handleLogout}
+              className="w-full sm:w-auto px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors"
+            >
+              Se déconnecter
+            </button>
           </div>
         </div>
       </main>

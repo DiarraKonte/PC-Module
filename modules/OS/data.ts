@@ -5,6 +5,9 @@ export default {
     icon: "gamepad",
     description: "Guide pour sélectionner le meilleur système d'exploitation pour ton setup gaming",
     image: "/images/gaming-setup.jpg",
+    difficulty: "débutant",
+    author: "Tech Gaming Pro",
+    price: 29.99,
   },
   lessons: [
     {

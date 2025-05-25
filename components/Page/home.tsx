@@ -25,7 +25,7 @@ export default function HomePage() {
       <section id="modules" className="py-16 bg-white dark:bg-gray-950 px-4">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-10">
-            Modules disponibles
+            Modules 
           </h1>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {Object.values(MODULES).map((module) => (
@@ -34,7 +34,7 @@ export default function HomePage() {
                 slug={module.meta.slug}
                 title={module.meta.title}
                 description={module.meta.description}
-                paid={true}
+                price={module.meta.price}
               />
             ))}
           </div>

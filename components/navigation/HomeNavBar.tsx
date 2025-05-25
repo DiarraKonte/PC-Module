@@ -1,20 +1,20 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, User, Zap, ChevronDown } from 'lucide-react';
+import { Menu, X, User, Zap, ChevronDown, Settings, Crown } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import DarkModeToggle from '@/components/ui/DarkMod';
-import ConnexionButton from '../login/ConnexionButton';
+import ConnexionButton from '../button/ConnexionButton';
 import RedirectHome from './RedirectHome';
-import LogoutButton from '../login/LgoutButton';
-import { useAuth } from '@/context/AuthContext';
+import LogoutButton from '../button/LgoutButton';
+import { useAuth } from '@/lib/AuthContext';
 
 export default function NavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const pathname = usePathname();
-  const { isAuthenticated, loading } = useAuth();
+  const { isAuthenticated, hasPremiumAccess } = useAuth();
 
   const navLinks = [
     { name: 'Modules', href: '/modules' },
@@ -23,6 +23,7 @@ export default function NavBar() {
     { name: 'Contact', href: '/contact' },
   ];
 
+  // Gestion du scroll
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -31,15 +32,25 @@ export default function NavBar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  if (loading) {
-    return (
-      <header className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm transition-all">
-        <div className="container mx-auto px-4 py-3 flex justify-center">
-          <span className="animate-pulse">Chargement...</span>
-        </div>
-      </header>
-    );
-  }
+ 
+
+  // Fermer les menus lors du changement de route
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setUserMenuOpen(false);
+  }, [pathname]);
+
+  // Fermer le menu mobile sur les grands écrans
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <header
@@ -79,10 +90,10 @@ export default function NavBar() {
               <DarkModeToggle />
 
               {isAuthenticated ? (
-                <div className="relative">
+                <div className="relative user-menu-container">
                   <button
                     onClick={() => setUserMenuOpen(!userMenuOpen)}
-                    className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-300 rounded-md font-medium"
+                    className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-300 rounded-md font-medium transition-colors"
                   >
                     <User className="w-5 h-5" />
                     <span className="hidden md:inline">Mon compte</span>
@@ -90,27 +101,41 @@ export default function NavBar() {
                   </button>
 
                   {userMenuOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-10 animate-fadeIn">
+                    <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-md shadow-lg py-2 z-10 animate-fadeIn border border-gray-200 dark:border-gray-700">
+                      <div className="px-4 py-2 border-b dark:border-gray-700">
+                        <p className="text-sm font-medium text-gray-900 dark:text-white">Mon compte</p>
+                        {hasPremiumAccess && (
+                          <div className="flex items-center mt-1">
+                            <Crown className="w-4 h-4 text-yellow-500 mr-1" />
+                            <span className="text-xs text-yellow-600 dark:text-yellow-400">Compte Premium</span>
+                          </div>
+                        )}
+                      </div>
+                      
                       <Link
                         href="/account"
-                        className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                         onClick={() => setUserMenuOpen(false)}
                       >
-                        Paramètres du compte
+                        <Settings className="w-4 h-4 mr-2" />
+                        Paramètres
                       </Link>
-                      <LogoutButton />
+                      
+                      <div className="px-4 py-2 border-t dark:border-gray-700">
+                        <LogoutButton 
+                        />
+                      </div>
                     </div>
                   )}
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
                   <ConnexionButton />
-                  <RedirectHome />
                 </div>
               )}
 
               <button
-                className="md:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+                className="md:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-expanded={mobileMenuOpen}
                 aria-label="Menu mobile"
@@ -139,16 +164,25 @@ export default function NavBar() {
                 ))}
 
                 {isAuthenticated && (
-                  <div className="pt-2 border-t dark:border-gray-800">
+                  <div className="pt-2 border-t dark:border-gray-800 space-y-2">
+                    <div className="px-3 py-2 flex items-center justify-between">
+                      <span className="text-gray-700 dark:text-gray-300">Compte</span>
+                      {hasPremiumAccess && (
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                          Premium
+                        </span>
+                      )}
+                    </div>
                     <Link
                       href="/account"
                       className="flex items-center gap-2 px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      <User className="w-5 h-5" />
-                      <span>Paramètres du compte</span>
+                      <Settings className="w-5 h-5" />
+                      <span>Paramètres</span>
                     </Link>
-                    <LogoutButton />
+                    <LogoutButton 
+                    />
                   </div>
                 )}
               </div>
@@ -167,8 +201,8 @@ export default function NavBar() {
         }
 
         @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
+          from { opacity: 0; transform: translateY(-5px); }
+          to { opacity: 1; transform: translateY(0); }
         }
         .animate-fadeIn {
           animation: fadeIn 0.2s ease-out forwards;

@@ -5,11 +5,11 @@ import { usePathname } from 'next/navigation';
 import { Menu, X, User, Zap } from 'lucide-react';
 import { useState } from 'react';
 import DarkModeToggle from '@/components/ui/DarkMod';
-import ConnexionButton from '../login/ConnexionButton';
+import ConnexionButton from '../button/ConnexionButton';
 import RedirectHome from './RedirectHome';
-import LogoutButton from '../login/LgoutButton';
+import LogoutButton from '../button/LgoutButton';
 
-import { useAuth } from '@/context/AuthContext';
+import { useAuth } from '@/lib/AuthContext';
 
 export default function NavBar1() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

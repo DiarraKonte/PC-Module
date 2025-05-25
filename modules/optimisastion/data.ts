@@ -11,8 +11,6 @@ export default {
     difficulty: "débutant",
     author: "Tech Gaming Pro",
     price: 29.99,
-    discountPrice: 19.99,
-    tags: ["gaming", "optimisation", "windows", "linux", "fps", "performance"]
   },
   
   lessons: [

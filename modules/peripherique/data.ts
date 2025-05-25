@@ -5,6 +5,9 @@ export default {
     icon: "🎮",
     description: "Découvre comment sélectionner ta souris, ton clavier, ton écran et tout ton setup selon ton profil de joueur",
     image: "/images/peripheriques-gaming.jpg",
+        difficulty: "débutant",
+    author: "Tech Gaming Pro",
+    price: 29.99,
   },
   lessons: [
     {
