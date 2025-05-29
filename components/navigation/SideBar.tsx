@@ -104,7 +104,7 @@ export function Sidebar({ currentLessonSlug, isOpen, onToggle, lessons, moduleMe
 
         <div className="mt-6">
           <Link
-            href="/modules"
+            href={`/modules/${moduleMeta.slug}`}
             onClick={handleLinkClick}
             className="flex items-center px-3 py-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
           >

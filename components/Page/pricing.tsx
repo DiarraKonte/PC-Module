@@ -64,8 +64,7 @@ export default function Pricing() {
             </ul>
 
             <StripePaymentButton
-              productId=""
-              price={100}
+              price={1900}
               buttonText={isAuthenticated ? "Obtenir l'accès maintenant" : "Se connecter pour acheter"}
             />
 

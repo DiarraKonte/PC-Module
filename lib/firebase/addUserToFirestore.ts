@@ -1,4 +1,4 @@
-import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from './firebase';
 
 interface UserData {
@@ -11,13 +11,21 @@ interface UserData {
 export async function addUserToFirestore(user: UserData) {
   const userRef = doc(db, 'users', user.uid);
 
+  // On récupère le document existant
+  const userSnap = await getDoc(userRef);
+  let hasPremiumAccess = false;
+  if (userSnap.exists() && userSnap.data().hasPremiumAccess !== undefined) {
+    hasPremiumAccess = userSnap.data().hasPremiumAccess;
+  }
+
   await setDoc(userRef, {
+    uid: user.uid,
     email: user.email,
     displayName: user.displayName || '',
     photoURL: user.photoURL || '',
-    hasPremiumAccess: false,
+    hasPremiumAccess,
     createdAt: serverTimestamp(),
     lastLogin: serverTimestamp(),
-    provider: 'google' // Pour identifier la méthode de connexion
+    provider: 'google'
   }, { merge: true });
 }

@@ -1,4 +1,3 @@
-import NavBar1 from "@/components/navigation/NavBar";
 import HomeComponent from "@/components/Page/Landing";
 import NavBar from "@/components/navigation/HomeNavBar";
 

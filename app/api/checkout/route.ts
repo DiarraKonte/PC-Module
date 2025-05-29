@@ -34,7 +34,6 @@ export async function POST(req: Request) {
       cancel_url: `${process.env.NEXT_PUBLIC_URL}/paiement/failed`,
       metadata: {
         userId,
-        productId: "prod_SNtiHxrFUC0zLB"
       },
     });
 

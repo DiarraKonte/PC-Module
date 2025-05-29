@@ -5,7 +5,6 @@ import { Menu, X, User, Zap, ChevronDown, Settings, Crown } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import DarkModeToggle from '@/components/ui/DarkMod';
 import ConnexionButton from '../ui/button/ConnexionButton';
-import RedirectHome from './RedirectHome';
 import LogoutButton from '../ui/button/LgoutButton';
 import { useAuth } from '@/lib/AuthContext';
 
@@ -14,11 +13,12 @@ export default function NavBar() {
   const [scrolled, setScrolled] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const pathname = usePathname();
-  const { isAuthenticated, hasPremiumAccess } = useAuth();
+  const { isAuthenticated } = useAuth();
+  const hasPremiumAccess = true;
 
   const navLinks = [
-    { name: 'Modules', href: '/modules' },
-    { name: 'Pricing', href: '/pricing' },
+    { name: 'Modules', href: '/module' },
+    ...(isAuthenticated && !hasPremiumAccess ? [{ name: 'Pricing', href: '/pricing' }] : []),
     ...(isAuthenticated ? [{ name: 'Mon espace', href: '/home' }] : []),
     { name: 'Contact', href: '/contact' },
   ];

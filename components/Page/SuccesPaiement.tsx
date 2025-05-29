@@ -14,17 +14,8 @@ export default function SuccessPage() {
     const sessionId = searchParams.get('session_id');
     
     if (sessionId) {
-      // Ici vous pouvez faire une requête à votre backend pour vérifier le paiement
-      fetch(`/api/verify-payment?session_id=${sessionId}`)
-        .then(res => res.json())
-        .then(data => {
-          setSessionData(data);
-          setLoading(false);
-        })
-        .catch(error => {
-          console.error("Erreur de vérification:", error);
-          setLoading(false);
-        });
+      setSessionData({ sessionId });
+      setLoading(false);
     } else {
       setLoading(false);
     }
