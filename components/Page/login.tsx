@@ -7,7 +7,7 @@ import { auth, googleProvider } from '@/lib/firebase/firebase';
 import { FcGoogle } from "react-icons/fc";
 import { Loader2, Zap } from 'lucide-react';
 import { toast } from 'react-hot-toast'; // Import de react-hot-toast
-import GoogleAuthButton from '../button/GoogleAuth';
+import GoogleAuthButton from '../ui/button/GoogleAuth';
 
 export default function LoginPage() {
   const router = useRouter();

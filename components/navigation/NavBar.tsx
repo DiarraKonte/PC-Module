@@ -1,13 +1,12 @@
-// components/NavBar.tsx
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, User, Zap } from 'lucide-react';
 import { useState } from 'react';
 import DarkModeToggle from '@/components/ui/DarkMod';
-import ConnexionButton from '../button/ConnexionButton';
+import ConnexionButton from '../ui/button/ConnexionButton';
 import RedirectHome from './RedirectHome';
-import LogoutButton from '../button/LgoutButton';
+import LogoutButton from '../ui/button/LgoutButton';
 
 import { useAuth } from '@/lib/AuthContext';
 

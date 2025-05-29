@@ -6,7 +6,7 @@ import { createUserWithEmailAndPassword, updateProfile, signInWithPopup } from '
 import { auth, googleProvider } from '@/lib/firebase/firebase';
 import { Loader2, User, Mail, Lock, Check } from 'lucide-react';
 import { FcGoogle } from "react-icons/fc";
-import GoogleAuthButton from '../button/GoogleAuth';
+import GoogleAuthButton from '../ui/button/GoogleAuth';
 
 export default function RegisterPage() {
   const router = useRouter();

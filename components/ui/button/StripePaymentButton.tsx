@@ -2,19 +2,14 @@
 import React from 'react';
 import { useAuth } from '@/lib/AuthContext';
 import { useRouter } from 'next/navigation';
-import { loadStripe } from '@stripe/stripe-js';
-
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!);
 
 interface StripePaymentButtonProps {
-  productId: string;
-  price: number; // en centimes (ex: 1900 pour 19€)
+  price: number; 
   buttonText?: string;
   className?: string;
 }
 
 export default function StripePaymentButton({
-  productId,
   price,
   buttonText = "Payer maintenant",
   className = "w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -37,7 +32,6 @@ export default function StripePaymentButton({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           userId: user?.uid,
-          productId,
           price
         }),
       });

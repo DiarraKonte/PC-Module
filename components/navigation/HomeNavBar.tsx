@@ -4,9 +4,9 @@ import { usePathname } from 'next/navigation';
 import { Menu, X, User, Zap, ChevronDown, Settings, Crown } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import DarkModeToggle from '@/components/ui/DarkMod';
-import ConnexionButton from '../button/ConnexionButton';
+import ConnexionButton from '../ui/button/ConnexionButton';
 import RedirectHome from './RedirectHome';
-import LogoutButton from '../button/LgoutButton';
+import LogoutButton from '../ui/button/LgoutButton';
 import { useAuth } from '@/lib/AuthContext';
 
 export default function NavBar() {

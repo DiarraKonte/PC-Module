@@ -44,7 +44,7 @@ export async function POST(req: Request) {
           productId: session.metadata?.productId 
         }, { merge: true });
 
-        console.log(`✅ Accès à vie activé pour l'utilisateur ${userId}`);
+        console.log(`Accès à vie activé pour l'utilisateur ${userId}`);
       } catch (firestoreError) {
         console.error("Firestore error:", firestoreError);
       }

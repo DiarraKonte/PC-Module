@@ -2,7 +2,7 @@
 import React from 'react';
 import NavBar from '@/components/navigation/HomeNavBar';
 import { useAuth } from '@/lib/AuthContext';
-import StripePaymentButton from '@/components/button/StripePaymentButton';
+import StripePaymentButton from '@/components/ui/button/StripePaymentButton';
 
 export default function Pricing() {
   const { isAuthenticated, loading } = useAuth();
@@ -64,8 +64,8 @@ export default function Pricing() {
             </ul>
 
             <StripePaymentButton
-              productId="prod_SNVnV69EEnT4OE"
-              price={1900}
+              productId=""
+              price={100}
               buttonText={isAuthenticated ? "Obtenir l'accès maintenant" : "Se connecter pour acheter"}
             />
 

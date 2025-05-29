@@ -1,4 +1,3 @@
-// app/api/checkout/route.ts
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
@@ -27,7 +26,7 @@ export async function POST(req: Request) {
             name: "Accès à vie - Tous les modules",
             description: "Un paiement unique pour un accès permanent",
           },
-          unit_amount: 1900, // 19€ en centimes
+          unit_amount: 1900, 
         },
         quantity: 1,
       }],
@@ -35,7 +34,7 @@ export async function POST(req: Request) {
       cancel_url: `${process.env.NEXT_PUBLIC_URL}/paiement/failed`,
       metadata: {
         userId,
-        productId: "prod_SNVnV69EEnT4OE" 
+        productId: "prod_SNtiHxrFUC0zLB"
       },
     });
 
@@ -47,4 +46,5 @@ export async function POST(req: Request) {
       { status: 500 }
     );
   }
+
 }
