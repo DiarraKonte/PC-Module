@@ -20,14 +20,7 @@ export async function POST(req: Request) {
       payment_method_types: ["card"],
       mode: "payment",
       line_items: [{
-        price_data: {
-          currency: "eur",
-          product_data: {
-            name: "Accès à vie - Tous les modules",
-            description: "Un paiement unique pour un accès permanent",
-          },
-          unit_amount: 1900, 
-        },
+        price: "price_1RU3LHHDOqMqJ0dSVnpP0PCj", 
         quantity: 1,
       }],
       success_url: `${process.env.NEXT_PUBLIC_URL}/paiement/succes?session_id={CHECKOUT_SESSION_ID}`,

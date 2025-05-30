@@ -89,7 +89,6 @@ export default function ModuleCard({
             canAccess ? 'text-gray-500 dark:text-gray-400' : 'text-gray-400 dark:text-gray-500'
           }`}>
             <Zap className="w-3 h-3 mr-1" />
-            {duration}
           </span>
           <span className={canAccess ? 'text-gray-500 dark:text-gray-400' : 'text-gray-400 dark:text-gray-500'}>
             {isFree ? 'Accès libre' : canAccess ? 'Accès autorisé' : 'Accès restreint'}

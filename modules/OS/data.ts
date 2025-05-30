@@ -2,12 +2,8 @@ export default {
   meta: {
     slug: "pc-OS-gaming",
     title: "Comment choisir son OS pour un PC gaming",
-    icon: "gamepad",
     description: "Guide pour sélectionner le meilleur système d'exploitation pour ton setup gaming",
-    image: "/images/gaming-setup.jpg",
-    difficulty: "débutant",
-    author: "Tech Gaming Pro",
-    price: 29.99,
+    price: 1,
   },
   lessons: [
     {

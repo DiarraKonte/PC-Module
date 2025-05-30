@@ -2,11 +2,12 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Link from 'next/link';
-import { createUserWithEmailAndPassword, updateProfile, signInWithPopup } from 'firebase/auth';
-import { auth, googleProvider } from '@/lib/firebase/firebase';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { auth } from '@/lib/firebase/firebase';
 import { Loader2, User, Mail, Lock, Check } from 'lucide-react';
-import { FcGoogle } from "react-icons/fc";
 import GoogleAuthButton from '../ui/button/GoogleAuth';
+import { addUserToFirestore } from '@/lib/firebase/addUserToFirestore';
+import { toast } from 'react-hot-toast';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -19,24 +20,47 @@ export default function RegisterPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState({
     email: false,
-    google: false
   });
   const [passwordStrength, setPasswordStrength] = useState(0);
 
-  const handleGoogleSignUp = async () => {
+
+  // Soumission du formulaire d'inscription
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError('');
+    setLoading({ email: true });
+
+    if (formData.password !== formData.confirmPassword) {
+      setError("Les mots de passe ne correspondent pas.");
+      setLoading({ email: false });
+      return;
+    }
+    if (!formData.pseudo || !formData.email || !formData.password) {
+      setError("Tous les champs sont obligatoires.");
+      setLoading({ email: false });
+      return;
+    }
     try {
-      setLoading(prev => ({ ...prev, google: true }));
-      setError('');
-      
-      await signInWithPopup(auth, googleProvider);
-      const redirect = new URLSearchParams(window.location.search).get('redirect') || '/';
-      router.push(redirect);
+      const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+      const user = userCredential.user;
+      await updateProfile(user, { displayName: formData.pseudo });
+
+      await addUserToFirestore({
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        provider: 'email',
+      });
+
+      toast.success('Inscription réussie !');
+      router.push('/home');
     } catch (error: any) {
-      setError(error.message || "Erreur lors de l'inscription avec Google");
+      setError(error.message || "Erreur lors de l'inscription");
     } finally {
-      setLoading(prev => ({ ...prev, google: false }));
+      setLoading({ email: false });
     }
   };
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -80,41 +104,6 @@ export default function RegisterPage() {
     }
 
     return true;
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-
-    if (!validateForm()) return;
-
-    setLoading(prev => ({ ...prev, email: true }));
-
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        formData.email,
-        formData.password
-      );
-
-      await updateProfile(userCredential.user, {
-        displayName: formData.pseudo
-      });
-      
-      const redirect = new URLSearchParams(window.location.search).get('redirect') || '/account/login';
-      router.push(`${redirect}?registered=true`);
-    } catch (error: any) {
-      const errorMessages = {
-        'auth/email-already-in-use': 'Cet email est déjà utilisé',
-        'auth/invalid-email': 'Email invalide',
-        'auth/weak-password': 'Mot de passe trop faible',
-        'default': "Une erreur s'est produite lors de l'inscription"
-      };
-      
-      setError(errorMessages[error.code as keyof typeof errorMessages] || errorMessages.default);
-    } finally {
-      setLoading(prev => ({ ...prev, email: false }));
-    }
   };
 
   const getPasswordStrengthColor = () => {

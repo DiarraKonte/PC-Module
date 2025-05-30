@@ -3,11 +3,8 @@ export default {
   meta: {
     slug: "pc-gaming",
     title: "Bien choisir son PC gaming",
-    icon: "🎮",
     description: "Apprends à définir tes besoins pour un setup parfaitement adapté à ton style de jeu.",
-    image: "/images/ChoosePc.png",
-    price: 0, // 0 signifie gratuit
-    duration: "1h 30min", // Ajout de la durée
+    price: 0, 
   },
   lessons: [
     {
@@ -25,7 +22,6 @@ Dans ce module, on ne va pas encore choisir les composants — ça viendra ensui
 
 Prends quelques minutes, lis tranquillement, et tu vas vite y voir plus clair 💡
       `,
-      image: "/images/modules/pc-gaming/intro.jpg"
     },
     {
       slug: "profil-gamer",
@@ -51,7 +47,6 @@ Tu veux jouer, **streamer en même temps**, ou faire du montage vidéo, créer d
 
 Repère-toi là-dedans : tu peux appartenir à plusieurs profils, ou glisser de l’un à l’autre avec le temps 🎮
       `,
-      image: "/images/modules/pc-gaming/profil.jpg"
     },
     {
       slug: "questions-a-se-poser",
@@ -79,8 +74,7 @@ Tu joues en 1080p, 1440p, ou 4K ? À 60 Hz ou 144 Hz ?
 
 💡 Une fois que tu as tes réponses, tu verras que **le choix des composants devient logique**.
       `,
-      image: "/images/modules/pc-gaming/questions.jpg"
-    },
+      },
     {
       slug: "eviter-les-erreurs",
       title: "Les erreurs fréquentes à éviter 🚫",
@@ -101,7 +95,6 @@ Voici ce que je vois très souvent chez ceux qui montent leur premier PC… et c
 
 Tu es là pour **choisir intelligemment**, pas juste "avoir le plus gros chiffre sur la boîte". Je vais t’aider à optimiser chaque euro 💪
       `,
-      image: "/images/modules/pc-gaming/erreurs.jpg"
     },
     {
       slug: "preparation-suite",
@@ -123,7 +116,6 @@ Et tu vas voir, c’est pas si compliqué. Je vais t’expliquer **comment chois
 
 À tout de suite dans le prochain module ! 🔥
       `,
-      image: "/images/modules/pc-gaming/ready.jpg"
     }
   ]
 } as const;

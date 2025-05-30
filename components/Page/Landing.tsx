@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ArrowRight, Zap, Cpu, Settings, HelpCircle, Users, Star } from "lucide-react";
 
 const Home = () => {

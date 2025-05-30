@@ -13,8 +13,7 @@ export default function NavBar() {
   const [scrolled, setScrolled] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const pathname = usePathname();
-  const { isAuthenticated } = useAuth();
-  const hasPremiumAccess = true;
+  const { isAuthenticated, hasPremiumAccess } = useAuth();
 
   const navLinks = [
     { name: 'Modules', href: '/module' },
@@ -118,7 +117,7 @@ export default function NavBar() {
                         onClick={() => setUserMenuOpen(false)}
                       >
                         <Settings className="w-4 h-4 mr-2" />
-                        Paramètres
+                        Profil
                       </Link>
                       
                       <div className="px-4 py-2 border-t dark:border-gray-700">
@@ -179,7 +178,7 @@ export default function NavBar() {
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <Settings className="w-5 h-5" />
-                      <span>Paramètres</span>
+                      <span>Profil</span>
                     </Link>
                     <LogoutButton 
                     />

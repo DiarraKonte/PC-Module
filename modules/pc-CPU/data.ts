@@ -1,14 +1,10 @@
 export default {
   meta: {
     slug: "pc-CPU",
-    title: "🖥️ Choisir SON processeur : Le guide complet 2025",
-    icon: "⚡",
+    title: "Choisir SON processeur : Le guide complet 2025",
     description:
       "Décrypte les specs techniques et trouve le CPU parfait pour ton budget et tes besoins !",
-    image: "",
-    difficulty: "débutant",
-    author: "Tech Gaming Pro",
-    price: 29.99,
+    price: 1,
   },
   lessons: [
     {

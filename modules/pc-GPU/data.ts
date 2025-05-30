@@ -2,12 +2,9 @@ export default {
   meta: {
     slug: "pc-GPU",
     title: "Choisir sa carte graphique (GPU)",
-    icon: "🎮",
     description: "Choisis la carte graphique parfaite pour toi",
-    image: "",
-    difficulty: "débutant",
-    author: "Tech Gaming Pro",
-    price: 29.99,
+    price: 1,
+
   },
   lessons: [
     {

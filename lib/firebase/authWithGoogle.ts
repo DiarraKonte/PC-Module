@@ -12,6 +12,7 @@ export async function authWithGoogle() {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
+      provider: 'google',
     });
 
     return user;

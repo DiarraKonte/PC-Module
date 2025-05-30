@@ -10,6 +10,8 @@ import { toast } from 'react-hot-toast';
 import NavBar from '@/components/navigation/HomeNavBar';
 import { useAuth } from '@/lib/AuthContext'; 
 import { Crown } from 'lucide-react';
+import { linkGoogleAccount } from '@/lib/firebase/linkGoogleAccount'; 
+import Link from 'next/link';
 
 
 export default function AccountPage() {
@@ -80,17 +82,40 @@ export default function AccountPage() {
                  <Crown className="w-4 h-4 text-yellow-500 mr-1" />
                 <span className="text-xs text-yellow-600 dark:text-yellow-400">Compte Premium</span>
               </div>
-            
-
             )}
           </div>
+
+          {user.providerData.every((provider) => provider.providerId !== 'google.com') ? (
+            <button
+              onClick={async () => {
+                try {
+                  await linkGoogleAccount();
+                  toast.success('Compte Google lié avec succès !');
+                  const updatedUser = auth.currentUser;
+                  setUser({ ...updatedUser } as User); 
+                } catch (error: any) {
+                  if (error.code === 'auth/credential-already-in-use') {
+                    toast.error("Ce compte Google est déjà lié à un autre utilisateur.");
+                  } else {
+                    toast.error("Erreur lors du linkage du compte Google.");
+                  }
+                }
+              }}
+              className="w-full sm:w-auto px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors mb-6"
+            >
+              Lier un compte Google
+            </button>
+          ) : (
+            <p className="text-green-600 text-sm text-center mb-6">Compte Google lié</p>
+          )}
+
 
           <DisplayUser user={user} />
         </div>
 
         <div className="space-y-8">
           <UpdateName user={user} />
-          <UpdatePassword user={user} />
+          <UpdatePassword/>
 
           <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">Déconnexion</h2>
@@ -103,6 +128,8 @@ export default function AccountPage() {
             >
               Se déconnecter
             </button>
+
+            
           </div>
         </div>
       </main>

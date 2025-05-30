@@ -2,12 +2,8 @@ export default {
   meta: {
     slug: "pc-RAM",
     title: "Choisir sa mémoire vive (RAM)",
-    icon: "memory",
     description: "Apprenez à comprendre et à choisir la quantité de RAM idéale pour votre ordinateur",
-    image: "/images/ram-modules.jpg",
-    difficulty: "débutant",
-    author: "Tech Gaming Pro",
-    price: 29.99,
+    price: 1,
   },
   lessons: [
     {

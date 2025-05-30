@@ -1,17 +1,20 @@
-// app/(main)/modules/[slug]/page.tsx
 "use client";
 
 import { notFound } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { getModule } from '@/modules';
 import LessonList from '@/components/modules/Modulelist';
 import NavBar from '@/components/navigation/HomeNavBar';
-import { Sidebar } from '@/components/navigation/SideBar';
-import { useState } from 'react';
 import ProtectedRoute from '@/components/Protected/PretotectedRoute';
+import Link from 'next/link';
+import { ArrowLeft, Home } from 'lucide-react';
+import React from 'react';
 
-export default function ModulePage({ params }: { params: { slug: string } }) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const module = getModule(params.slug);
+export default function ModulePage() {
+  const params = useParams();
+  const slug = params.slug as string;
+
+  const module = getModule(slug);
 
   if (!module) return notFound();
 
@@ -21,26 +24,46 @@ export default function ModulePage({ params }: { params: { slug: string } }) {
     <ProtectedRoute isFree={isFree}>
       <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
         <NavBar />
-
         <div className="flex flex-1">
-          <Sidebar
-            currentLessonSlug={undefined}
-            isOpen={isSidebarOpen}
-            onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
-            lessons={[...module.lessons]}
-            moduleMeta={{ slug: module.meta.slug, title: module.meta.title }}
-          />
-
-          <main className="flex-1 py-10 px-6 sm:px-10 lg:px-16">
+          <main className="flex-1 py-8 px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
-              <h1 className="text-4xl font-extrabold tracking-tight mb-4">
-                {module.meta.title}
-              </h1>
-              <p className="text-lg text-gray-600 dark:text-gray-300 mb-10">
-                {module.meta.description}
-              </p>
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                <div className="flex items-center gap-3">
+                  <Link 
+                    href="/home" 
+                    className="flex items-center text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+                  >
+                    <ArrowLeft className="h-4 w-4 mr-1" />
+                    Retour à l'accueil
+                  </Link>
+                  <Home className="h-4 w-4" />
+                </div>
+              </div>
 
-              <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+              <div className="mb-10">
+                <div className="flex flex-col md:flex-row gap-6 items-start">
+                  <div className="flex-1">
+                    <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-2">
+                      {module.meta.title}
+                    </h1>
+                    <div className="flex items-center gap-2 mb-4">
+                      <span className={`text-xs px-2 py-1 rounded-full ${
+                        isFree
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300'
+                          : 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300'
+                      }`}>
+                        {isFree ? 'Gratuit' : 'Premium'}
+                      </span>
+                    </div>
+                    <p className="text-lg text-gray-600 dark:text-gray-300">
+                      {module.meta.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="border-t border-gray-200 dark:border-gray-700 pt-8">
+                <h2 className="text-xl font-semibold mb-6">Leçons du module</h2>
                 <LessonList
                   lessons={module.lessons.map(({ slug, title }) => ({ slug, title }))}
                   moduleSlug={module.meta.slug}

@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '@/lib/firebase/firebase';
-import { FcGoogle } from "react-icons/fc";
 import { Loader2, Zap } from 'lucide-react';
 import { toast } from 'react-hot-toast'; // Import de react-hot-toast
 import GoogleAuthButton from '../ui/button/GoogleAuth';
@@ -162,7 +161,7 @@ export default function LoginPage() {
             </div>
 
             <Link 
-              href="/forgot-password" 
+              href="/account/reset-pwd" 
               className="text-sm text-blue-600 hover:text-blue-500 dark:text-blue-400 hover:underline"
             >
               Mot de passe oublié ?
@@ -191,7 +190,7 @@ export default function LoginPage() {
             href="/account/register" 
             className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 hover:underline"
           >
-            S'inscrire
+            Créer un compte
           </Link>
         </div>
       </div>

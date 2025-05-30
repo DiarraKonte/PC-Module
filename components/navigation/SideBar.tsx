@@ -48,10 +48,15 @@ export function Sidebar({ currentLessonSlug, isOpen, onToggle, lessons, moduleMe
       )}
 
       <aside
-        className={`fixed md:sticky top-0 z-50 w-72 bg-white dark:bg-gray-900 p-6 border-r dark:border-gray-700 shadow-lg dark:shadow-none transition-transform duration-300 ease-in-out ${
-          isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
-        } h-[calc(100vh-4rem)] md:h-screen overflow-y-auto`}
-      >
+      className={`
+    fixed md:sticky top-0 z-50 w-72 bg-white dark:bg-gray-900 p-6 border-r dark:border-gray-700 shadow-lg dark:shadow-none 
+    transition-transform duration-300 ease-in-out
+    ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+    h-[calc(100vh-4rem)] md:h-screen
+    overflow-y-auto
+    scrollbar-thin scrollbar-thumb-blue-500 dark:scrollbar-thumb-blue-300 scrollbar-track-gray-200 dark:scrollbar-track-gray-800
+  `}
+>
         <button
           onClick={onToggle}
           className="md:hidden absolute top-4 right-4 p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"

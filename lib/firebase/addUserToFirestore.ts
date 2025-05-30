@@ -5,13 +5,12 @@ interface UserData {
   uid: string;
   email: string | null;
   displayName?: string | null;
-  photoURL?: string | null;
+  provider?: string;
 }
 
 export async function addUserToFirestore(user: UserData) {
   const userRef = doc(db, 'users', user.uid);
 
-  // On récupère le document existant
   const userSnap = await getDoc(userRef);
   let hasPremiumAccess = false;
   if (userSnap.exists() && userSnap.data().hasPremiumAccess !== undefined) {
@@ -22,10 +21,9 @@ export async function addUserToFirestore(user: UserData) {
     uid: user.uid,
     email: user.email,
     displayName: user.displayName || '',
-    photoURL: user.photoURL || '',
     hasPremiumAccess,
     createdAt: serverTimestamp(),
     lastLogin: serverTimestamp(),
-    provider: 'google'
+    provider: user.provider || 'email',
   }, { merge: true });
 }

@@ -2,12 +2,8 @@ export default {
   meta: {
     slug: "peripheriques-gaming",
     title: "Périphériques PC gaming : bien choisir selon ton style de jeu 🎮",
-    icon: "🎮",
     description: "Découvre comment sélectionner ta souris, ton clavier, ton écran et tout ton setup selon ton profil de joueur",
-    image: "/images/peripheriques-gaming.jpg",
-        difficulty: "débutant",
-    author: "Tech Gaming Pro",
-    price: 29.99,
+    price: 1,
   },
   lessons: [
     {

@@ -4,13 +4,8 @@ export default {
   meta: {
     slug: "pc-gaming-optimization",
     title: "PC Gaming Elite: Guide d'Optimisation Ultime",
-    icon: "🎮",
     description: "Découvrez les secrets des pros pour booster les performances de votre PC gaming sans changer de matériel. Optimisations système, astuces logicielles et configurations de jeux expliquées simplement.",
-    duration: "5 heures",
-    image: "",
-    difficulty: "débutant",
-    author: "Tech Gaming Pro",
-    price: 29.99,
+    price: 1,
   },
   
   lessons: [
@@ -45,7 +40,6 @@ Ce n'est pas une simple liste de "astuces" trouvées sur Internet. Chaque techni
 - Expliquée pour que vous compreniez POURQUOI ça fonctionne
 
 Prêt à transformer votre expérience de jeu? Commençons!`,
-      image: "/assets/why-optimize-gaming.jpg",
       duration: "20 minutes"
     },
     
@@ -136,10 +130,7 @@ Un Windows encombré est un Windows lent! Voici 3 opérations de maintenance ess
 
 ### Quel gain attendre?
 Ces optimisations Windows peuvent représenter un gain de 5 à 15% sur les FPS dans vos jeux préférés, particulièrement sur les systèmes d'entrée ou milieu de gamme.`,
-      image: "/assets/windows-gaming-optimize.jpg",
-      duration: "45 minutes"
     },
-    
 {
   slug: "pilotes-graphiques",
   title: "Pilotes graphiques: la clé des performances",
@@ -166,7 +157,7 @@ GeForce Experience est l'outil officiel de NVIDIA qui simplifie la gestion des p
    - Option "Express": installation rapide, paramètres par défaut
    - Option "Personnalisée": pour les utilisateurs avancés, permet de choisir les composants
 
-![NVIDIA GeForce Experience](/assets/geforce-experience.jpg)
+![NVIDIA GeForce Experience]
 
 ### Types de pilotes NVIDIA:
 - **Game Ready**: stables, optimisés pour les jeux récents
@@ -245,7 +236,6 @@ Linux gagne en popularité pour le gaming grâce à Steam Proton. Les pilotes so
 - **Joueur compétitif**: à chaque sortie de pilote "Game Ready" pour vos jeux préférés
 
 N'oubliez pas: un pilote trop récent peut parfois introduire des bugs. Si vous constatez des problèmes après une mise à jour, n'hésitez pas à revenir à une version précédente stable.`,
-  image: "/assets/gpu-drivers-update.jpg",
   duration: "30 minutes"
 },
 
@@ -264,7 +254,7 @@ Avant d'optimiser, il faut identifier ce qui ralentit votre système. Le Gestion
 3. Triez par utilisation de **CPU**, **Mémoire** ou **GPU**
 4. Identifiez les processus qui consomment trop de ressources
 
-![Gestionnaire des tâches](/assets/task-manager-resources.jpg)
+![Gestionnaire des tâches]
 
 > **Astuce**: Activez "Toujours au premier plan" pour surveiller l'utilisation des ressources pendant que vous jouez.
 
@@ -359,8 +349,6 @@ Ces optimisations de ressources peuvent libérer:
 - **Réduction des micro-saccades** liées aux programmes en arrière-plan
 
 Pour certains jeux CPU-bound (comme Minecraft, CS:GO), l'impact sur les FPS peut atteindre +20% simplement en libérant ces ressources système!`,
-      image: "/assets/free-system-resources.jpg",
-      duration: "40 minutes"
     },
     
     {
@@ -465,4 +453,5 @@ Pour les joueurs sous Linux, deux outils essentiels:
 - Ajuste la fréquence CPU/GPU au maximum
 - Installation: \`sudo apt install gamemode\` (Ubuntu/Debian)
 - Utilisation: lancez vos jeux avec \`gamemoderun ./jeu\``
-    }]}
+
+}]}

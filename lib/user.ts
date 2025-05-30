@@ -36,7 +36,6 @@ export async function updateUserAccess(userId: string) {
       });
     }
 
-    // Enregistrement de l'historique de paiement
     try {
       const paymentHistoryRef = admin.firestore()
         .collection('paymentHistory')

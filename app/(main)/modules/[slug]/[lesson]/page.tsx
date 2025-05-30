@@ -1,4 +1,5 @@
 'use client';
+
 import { notFound } from "next/navigation";
 import { getModule } from "@/modules";
 import NavBar from "@/components/navigation/HomeNavBar";
@@ -17,18 +18,17 @@ export default function LessonPage({
   const [isMobile, setIsMobile] = useState(false);
   const params = React.use(paramsPromise);
 
-
+  // Détecte si on est en mobile
   useEffect(() => {
     const checkIfMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-      if (window.innerWidth >= 768) {
-        setIsSidebarOpen(true);
-      }
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (!mobile) setIsSidebarOpen(true); // Toujours ouvert sur desktop
     };
 
     checkIfMobile();
-    window.addEventListener('resize', checkIfMobile);
-    return () => window.removeEventListener('resize', checkIfMobile);
+    window.addEventListener("resize", checkIfMobile);
+    return () => window.removeEventListener("resize", checkIfMobile);
   }, []);
 
   const module = getModule(params.slug);
@@ -36,14 +36,14 @@ export default function LessonPage({
 
   if (!module || !lesson) return notFound();
 
-    const isFree = module.meta.price === 0;
+  const isFree = module.meta.price === 0;
 
   return (
     <ProtectedRoute isFree={isFree}>
       <div className="flex flex-col min-h-screen">
         <NavBar />
 
-        {/* Bouton toggle pour mobile */}
+        {/* Bouton mobile pour ouvrir la sidebar */}
         {isMobile && (
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -54,10 +54,17 @@ export default function LessonPage({
           </button>
         )}
 
-        <div className="flex flex-1 relative overflow-hidden"> {/* Changement ici */}
-          <div className={`fixed md:static z-20 h-full transition-transform duration-300 ease-in-out ${
-            isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
-          }`}>
+        {/* Layout principal avec sidebar + contenu */}
+        <div className="flex flex-1 relative overflow-hidden">
+          {/* SIDEBAR (fixée à gauche) */}
+          <aside
+            className={`
+              z-20 h-full w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700
+              transition-transform duration-300 ease-in-out
+              fixed
+              ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
+            `}
+          >
             <Sidebar
               currentLessonSlug={lesson.slug}
               isOpen={isSidebarOpen}
@@ -65,16 +72,13 @@ export default function LessonPage({
               lessons={module.lessons.slice()}
               moduleMeta={{ slug: module.meta.slug, title: module.meta.title }}
             />
-          </div>
+          </aside>
 
-
-          <main className="flex-1 overflow-y-auto"> {/* Changement important ici */}
+          {/*CONTENU */}
+          <main className="flex-1 overflow-y-auto">
             <div className="container mx-auto py-8 px-4">
               <div className="max-w-4xl mx-auto">
-                <LessonContent
-                  title={lesson.title}
-                  content={lesson.content}
-                />
+                <LessonContent title={lesson.title} content={lesson.content} />
               </div>
             </div>
           </main>
