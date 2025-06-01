@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import Link from 'next/link';
 import { Mail, Loader2, ArrowLeft } from 'lucide-react';
 
+
 import HomeNavBar from '@/components/navigation/HomeNavBar';
 
 export default function PasswordReset() {
@@ -46,32 +47,35 @@ export default function PasswordReset() {
         }
       );
       setEmailSent(true);
-    } catch (error: any) {
-      let errorMessage = "Une erreur est survenue";
-      let toastStyle = {};
-      
-      switch (error.code) {
-        case 'auth/user-not-found':
-          errorMessage = "Aucun compte trouvé avec cet email";
-          break;
-        case 'auth/invalid-email':
-          errorMessage = "Adresse email invalide";
-          break;
-        case 'auth/too-many-requests':
-          errorMessage = "Trop de tentatives. Veuillez réessayer plus tard";
-          toastStyle = {
-            background: '#fffbeb',
-            color: '#b45309',
-            border: '1px solid #fcd34d'
-          };
-          break;
-      }
-      
-      toast.error(errorMessage, { 
-        duration: 4000,
-        style: toastStyle
-      });
-    } finally {
+    } catch (error: unknown) {
+  let errorMessage = "Une erreur est survenue";
+  let toastStyle = {};
+
+  if (typeof error === "object" && error !== null && "code" in error) {
+    const code = (error as { code: string }).code;
+    switch (code) {
+      case 'auth/user-not-found':
+        errorMessage = "Aucun compte trouvé avec cet email";
+        break;
+      case 'auth/invalid-email':
+        errorMessage = "Adresse email invalide";
+        break;
+      case 'auth/too-many-requests':
+        errorMessage = "Trop de tentatives. Veuillez réessayer plus tard";
+        toastStyle = {
+          background: '#fffbeb',
+          color: '#b45309',
+          border: '1px solid #fcd34d'
+        };
+        break;
+    }
+  }
+
+  toast.error(errorMessage, { 
+    duration: 4000,
+    style: toastStyle
+  });
+} finally {
       setLoading(false);
     }
   };
@@ -151,7 +155,7 @@ export default function PasswordReset() {
                 <div className="text-center space-y-6">
                   <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-100 dark:border-green-800">
                     <p className="text-green-700 dark:text-green-300">
-                      Si vous ne recevez pas l'email, vérifiez votre dossier spam ou contactez notre support.
+                      Si vous ne recevez pas l&apos;email, vérifiez votre dossier spam ou contactez notre support.
                     </p>
                   </div>
 
@@ -166,15 +170,6 @@ export default function PasswordReset() {
                   </button>
                 </div>
               )}
-            </div>
-            
-            <div className="bg-gray-50 dark:bg-gray-700/30 px-8 py-4 border-t border-gray-200 dark:border-gray-700">
-              <p className="text-center text-sm text-gray-500 dark:text-gray-400">
-                Vous n'avez pas de compte ?{' '}
-                <Link href="/account/register" className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300">
-                  Créer un compte
-                </Link>
-              </p>
             </div>
           </div>
         </div>

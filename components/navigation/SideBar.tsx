@@ -18,7 +18,7 @@ type SidebarProps = {
 };
 
 export function Sidebar({ currentLessonSlug, isOpen, onToggle, lessons, moduleMeta }: SidebarProps) {
-  const currentIndex = lessons.findIndex(l => l.slug === currentLessonSlug);
+  const currentIndex = lessons.findIndex((l) => l.slug === currentLessonSlug);
 
   const handleLinkClick = () => {
     if (window.innerWidth < 1024) {
@@ -26,6 +26,7 @@ export function Sidebar({ currentLessonSlug, isOpen, onToggle, lessons, moduleMe
     }
   };
 
+  // Bloque le scroll en arrière-plan si sidebar ouverte
   useEffect(() => {
     if (isOpen && window.innerWidth < 1024) {
       document.body.style.overflow = 'hidden';
@@ -40,40 +41,48 @@ export function Sidebar({ currentLessonSlug, isOpen, onToggle, lessons, moduleMe
 
   return (
     <>
-      {isOpen && (
-        <div 
-          className="fixed inset-0 bg-black/50 z-40 md:hidden"
+      {/* Overlay (mobile & tablette) */}
+      {isOpen && window.innerWidth < 1024 && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40"
           onClick={onToggle}
         />
       )}
 
+      {/* Sidebar principale */}
       <aside
-      className={`
-    fixed md:sticky top-0 z-50 w-72 bg-white dark:bg-gray-900 p-6 border-r dark:border-gray-700 shadow-lg dark:shadow-none 
-    transition-transform duration-300 ease-in-out
-    ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
-    h-[calc(100vh-4rem)] md:h-screen
-    overflow-y-auto
-    scrollbar-thin scrollbar-thumb-blue-500 dark:scrollbar-thumb-blue-300 scrollbar-track-gray-200 dark:scrollbar-track-gray-800
-  `}
->
-        <button
-          onClick={onToggle}
-          className="md:hidden absolute top-4 right-4 p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-          aria-label="Fermer le menu"
-        >
-          <X className="w-5 h-5" />
-        </button>
+        className={`
+          fixed md:sticky top-0 z-50 w-72 bg-white dark:bg-gray-900 p-6 border-r dark:border-gray-700 shadow-lg dark:shadow-none
+          transition-transform duration-300 ease-in-out
+          ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+          h-[calc(100vh-4rem)] md:h-screen
+          overflow-y-auto
+          scrollbar-thin scrollbar-thumb-blue-500 dark:scrollbar-thumb-blue-300 scrollbar-track-gray-200 dark:scrollbar-track-gray-800
+        `}
+      >
+        {/* Bouton fermer (seulement sur mobile/tablette) */}
+        {isOpen && window.innerWidth < 1024 && (
+          <button
+            onClick={onToggle}
+            className="absolute top-4 right-4 p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            aria-label="Fermer le menu"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        )}
 
+        {/* En-tête */}
         <div className="flex items-center space-x-2 mb-8">
           <BookOpen className="h-6 w-6 text-blue-600" />
           <h2 className="text-xl font-bold text-gray-800 dark:text-white">{moduleMeta.title}</h2>
         </div>
 
+        {/* Liste des leçons */}
         <ul className="space-y-1">
           {lessons.map((lesson, idx) => {
             const isActive = lesson.slug === currentLessonSlug;
             const isCompleted = idx < currentIndex;
+
             return (
               <li key={lesson.slug}>
                 <Link
@@ -98,15 +107,17 @@ export function Sidebar({ currentLessonSlug, isOpen, onToggle, lessons, moduleMe
                       <div className="w-4 h-4 rounded-full border-2 border-gray-300 dark:border-gray-600" />
                     )}
                   </div>
-                  <span className="text-sm md:text-base">{lesson.title}</span>
+                  <span className="text-sm md:text-base truncate">{lesson.title}</span>
                 </Link>
               </li>
             );
           })}
         </ul>
 
+        {/* Progression */}
         <ProgressBar currentLessonSlug={currentLessonSlug} lessons={lessons} />
 
+        {/* Liens rapides */}
         <div className="mt-6">
           <Link
             href={`/modules/${moduleMeta.slug}`}

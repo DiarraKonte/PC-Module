@@ -1,13 +1,9 @@
 // components/modules/ModuleProgress.tsx
 "use client";
 
-import { useAuth } from '@/lib/AuthContext';
-
-export default function ModuleProgress({ moduleSlug }: { moduleSlug: string }) {
-  const { user } = useAuth();
+export default function ModuleProgress() {
   
-  // Ici vous devriez récupérer la vraie progression depuis votre base de données
-  const progress = 0; // Remplacer par la vraie valeur
+  const progress = 0; 
   
   return (
     <div className="flex items-center gap-2">

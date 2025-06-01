@@ -54,8 +54,15 @@ export default function RegisterPage() {
 
       toast.success('Inscription réussie !');
       router.push('/home');
-    } catch (error: any) {
-      setError(error.message || "Erreur lors de l'inscription");
+    } catch (error: unknown) {
+      const errorMessages = {
+        'auth/email-already-in-use': "Cet email est déjà utilisé",
+        'auth/invalid-email': "Email invalide",
+        'auth/weak-password': "Mot de passe trop faible",
+        'default': "Une erreur est survenue lors de l'inscription"
+      };
+      
+      setError(errorMessages[(error as { code: string }).code as keyof typeof errorMessages] || errorMessages.default);
     } finally {
       setLoading({ email: false });
     }
@@ -75,35 +82,6 @@ export default function RegisterPage() {
       if (/[^A-Za-z0-9]/.test(value)) strength += 1;
       setPasswordStrength(strength);
     }
-  };
-
-  const validateForm = () => {
-    if (!formData.pseudo || !formData.email || !formData.password || !formData.confirmPassword) {
-      setError('Tous les champs sont requis');
-      return false;
-    }
-
-    if (formData.pseudo.length < 3) {
-      setError('Le pseudo doit contenir au moins 3 caractères');
-      return false;
-    }
-
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      setError('Veuillez entrer une adresse email valide');
-      return false;
-    }
-
-    if (formData.password.length < 6) {
-      setError('Le mot de passe doit contenir au moins 6 caractères');
-      return false;
-    }
-
-    if (formData.password !== formData.confirmPassword) {
-      setError('Les mots de passe ne correspondent pas');
-      return false;
-    }
-
-    return true;
   };
 
   const getPasswordStrengthColor = () => {
@@ -296,7 +274,7 @@ export default function RegisterPage() {
         <div className="text-center text-xs text-gray-500 dark:text-gray-400">
           En vous inscrivant, vous acceptez nos{' '}
           <Link href="/terms" className="text-blue-600 hover:text-blue-500 dark:text-blue-400 hover:underline">
-            Conditions d'utilisation
+            Conditions d&apos;utilisation
           </Link>{' '}
           et notre{' '}
           <Link href="/privacy" className="text-blue-600 hover:text-blue-500 dark:text-blue-400 hover:underline">

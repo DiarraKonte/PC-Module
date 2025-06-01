@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from 'react';
 import NavBar from '@/components/navigation/HomeNavBar';
 import { useAuth } from '@/lib/AuthContext';
@@ -10,12 +10,13 @@ export default function Pricing() {
   const plan = {
     name: 'Accès à vie',
     price: '19€',
+    originalPrice: '39€',
     description: 'Un paiement unique pour débloquer tous les modules.',
     features: [
       'Accès complet à tous les modules',
-      'Mises à jour incluses',
-      'Support prioritaire'
+      'Support prioritaire',
     ],
+    promoLabel: 'Offre de lancement limitée',
   };
 
   if (loading) {
@@ -38,14 +39,22 @@ export default function Pricing() {
           <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text dark:from-blue-400 dark:to-purple-400">
             Offre Unique
           </h1>
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-12">
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-4">
             Un seul paiement. Aucun abonnement. Accès illimité à tous les modules.
           </p>
+
+          <span className="inline-block bg-yellow-400 text-yellow-900 font-semibold px-3 py-1 rounded-full text-sm mb-6 animate-pulse">
+            {plan.promoLabel}
+          </span>
 
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-8">
             <h2 className="text-2xl font-bold mb-2">{plan.name}</h2>
             <p className="text-gray-600 dark:text-gray-400 mb-4">{plan.description}</p>
-            <div className="text-4xl font-extrabold mb-6">{plan.price}</div>
+
+            <div className="mb-6 flex items-center justify-center space-x-3">
+              <span className="text-xl text-gray-400 line-through">{plan.originalPrice}</span>
+              <span className="text-4xl font-extrabold text-green-600">{plan.price}</span>
+            </div>
 
             <ul className="space-y-3 mb-8 text-left">
               {plan.features.map((feature, i) => (
@@ -70,7 +79,7 @@ export default function Pricing() {
 
             {!isAuthenticated && (
               <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
-                Vous avez déjà un compte?{' '}
+                Vous avez déjà un compte ?{' '}
                 <a 
                   href="/account/login" 
                   className="text-blue-600 dark:text-blue-400 hover:underline"

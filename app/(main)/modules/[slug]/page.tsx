@@ -14,11 +14,11 @@ export default function ModulePage() {
   const params = useParams();
   const slug = params.slug as string;
 
-  const module = getModule(slug);
+  const moduleData = getModule(slug);
 
-  if (!module) return notFound();
+  if (!moduleData) return notFound();
 
-  const isFree = module.meta.price === 0;
+  const isFree = moduleData.meta.price === 0;
 
   return (
     <ProtectedRoute isFree={isFree}>
@@ -34,7 +34,7 @@ export default function ModulePage() {
                     className="flex items-center text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
                   >
                     <ArrowLeft className="h-4 w-4 mr-1" />
-                    Retour à l'accueil
+                    Retour à l&apos;accueil
                   </Link>
                   <Home className="h-4 w-4" />
                 </div>
@@ -44,7 +44,7 @@ export default function ModulePage() {
                 <div className="flex flex-col md:flex-row gap-6 items-start">
                   <div className="flex-1">
                     <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-2">
-                      {module.meta.title}
+                      {moduleData.meta.title}
                     </h1>
                     <div className="flex items-center gap-2 mb-4">
                       <span className={`text-xs px-2 py-1 rounded-full ${
@@ -56,7 +56,7 @@ export default function ModulePage() {
                       </span>
                     </div>
                     <p className="text-lg text-gray-600 dark:text-gray-300">
-                      {module.meta.description}
+                      {moduleData.meta.description}
                     </p>
                   </div>
                 </div>
@@ -65,8 +65,8 @@ export default function ModulePage() {
               <div className="border-t border-gray-200 dark:border-gray-700 pt-8">
                 <h2 className="text-xl font-semibold mb-6">Leçons du module</h2>
                 <LessonList
-                  lessons={module.lessons.map(({ slug, title }) => ({ slug, title }))}
-                  moduleSlug={module.meta.slug}
+                  lessons={moduleData.lessons.map(({ slug, title }) => ({ slug, title }))}
+                  moduleSlug={moduleData.meta.slug}
                 />
               </div>
             </div>

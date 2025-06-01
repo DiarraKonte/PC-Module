@@ -20,7 +20,7 @@ export async function POST(req: Request) {
       payment_method_types: ["card"],
       mode: "payment",
       line_items: [{
-        price: "price_1RU3LHHDOqMqJ0dSVnpP0PCj", 
+        price: "price_1RVFYNH8DP2JLyDjaUmeYf9G", 
         quantity: 1,
       }],
       success_url: `${process.env.NEXT_PUBLIC_URL}/paiement/succes?session_id={CHECKOUT_SESSION_ID}`,

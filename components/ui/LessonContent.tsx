@@ -10,8 +10,6 @@ interface LessonContentProps {
   image?: string;
   imageWidth?: number;
   imageHeight?: number;
-  onNextLesson?: () => void;
-  difficulty?: 'beginner' | 'intermediate' | 'advanced';
   category?: string;
   tags?: string[];
 }
@@ -22,31 +20,20 @@ export default function LessonContent({
   image,
   imageWidth = 800,
   imageHeight = 450,
-  onNextLesson,
-  difficulty = 'beginner',
   category,
   tags = [],
 }: LessonContentProps) {
-  const [readingTime, setReadingTime] = useState<number>(0);
+
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [readingProgress, setReadingProgress] = useState<number>(0);
-  const [isBookmarked, setIsBookmarked] = useState(false);
   const [showTableOfContents, setShowTableOfContents] = useState(false);
   const [activeHeading, setActiveHeading] = useState<string>('');
   const contentRef = useRef<HTMLDivElement>(null);
   const headingsRef = useRef<HTMLElement[]>([]);
 
-  // Calculer le temps de lecture estimé
-  useEffect(() => {
-    if (content) {
-      // Moyenne de 200 mots par minute pour la lecture
-      const wordCount = content.split(/\s+/).length;
-      const minutes = Math.ceil(wordCount / 200);
-      setReadingTime(minutes);
-    }
-  }, [content]);
 
-  // Suivre la progression de lecture
+
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
@@ -54,7 +41,6 @@ export default function LessonContent({
       const progress = Math.min((scrollTop / docHeight) * 100, 100);
       setReadingProgress(progress);
 
-      // Détecter la section active
       const headings = headingsRef.current;
       if (headings.length > 0) {
         let activeIndex = 0;
@@ -88,14 +74,6 @@ export default function LessonContent({
     }
   };
 
-  const getDifficultyColor = (diff: string) => {
-    switch (diff) {
-      case 'beginner': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
-      case 'intermediate': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200';
-      case 'advanced': return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
-      default: return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200';
-    }
-  };
 
   if (!title || !content) {
     return (
@@ -103,10 +81,12 @@ export default function LessonContent({
         <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
-        <p className="mt-3 text-lg font-medium text-gray-600 dark:text-gray-300">Le contenu de cette leçon n'est pas disponible.</p>
+        <p className="mt-3 text-lg font-medium text-gray-600 dark:text-gray-300">Le contenu de cette leçon n&apos;est pas disponible.</p>
       </div>
     );
   }
+
+ 
 
   return (
     <>
@@ -153,7 +133,7 @@ export default function LessonContent({
       )}
 
       {/* Actions flottantes */}
-      <div className="fixed right-4 bottom-4 flex flex-col gap-2 z-30">
+      <div className="fixed right-4 top-24 flex flex-col gap-2 z-30">
    
 
         <button
@@ -171,15 +151,8 @@ export default function LessonContent({
         <div className="flex flex-col mb-8">
           <div className="flex flex-wrap items-center gap-4 mb-4">
             <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <span>{readingTime} min de lecture</span>
             </div>
 
-            <span className={`px-3 py-1 text-xs font-medium rounded-full ${getDifficultyColor(difficulty)}`}>
-              {difficulty === 'beginner' ? 'Débutant' : difficulty === 'intermediate' ? 'Intermédiaire' : 'Avancé'}
-            </span>
 
             {category && (
               <span className="px-3 py-1 text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full">
@@ -267,9 +240,9 @@ export default function LessonContent({
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
-              h1: ({ node, ...props }) => <h1 className="text-4xl font-bold mb-8 pb-4 border-b-2 border-gray-200 dark:border-gray-700" {...props} />,
-              h2: ({ node, children, ...props }) => {
-                const text = children?.toString() || '';
+              h1: (props) => <h1 className="text-4xl font-bold mb-8 pb-4 border-b-2 border-gray-200 dark:border-gray-700" {...props} />,
+              h2: (props) => {
+                const text = props.children?.toString() || '';
                 const id = text.toLowerCase().replace(/\s+/g, '-');
                 return (
                   <h2
@@ -283,7 +256,7 @@ export default function LessonContent({
                     }}
                   >
                     <span className="mr-3 w-2 h-8 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full opacity-80"></span>
-                    {children}
+                    {props.children}
                     <button
                       onClick={() => scrollToHeading(id)}
                       className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity"
@@ -295,9 +268,9 @@ export default function LessonContent({
                   </h2>
                 );
               },
-              h3: ({ node, ...props }) => <h3 className="text-xl font-semibold mt-8 mb-4 text-gray-800 dark:text-gray-200 flex items-center"><span className="w-1 h-6 bg-purple-500 rounded mr-3"></span>{props.children}</h3>,
-              ul: ({ node, ...props }) => <ul className="space-y-3 my-6" {...props} />,
-              li: ({ node, ...props }) => (
+              h3: (props) => <h3 className="text-xl font-semibold mt-8 mb-4 text-gray-800 dark:text-gray-200 flex items-center"><span className="w-1 h-6 bg-purple-500 rounded mr-3"></span>{props.children}</h3>,
+              ul: (props) => <ul className="space-y-3 my-6" {...props} />,
+              li: (props) => (
                 <li className="flex items-start group">
                   <span className="inline-flex items-center justify-center w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mr-3 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform">
                     <span className="w-2 h-2 bg-white rounded-full"></span>
@@ -305,12 +278,12 @@ export default function LessonContent({
                   <span className="leading-relaxed" {...props} />
                 </li>
               ),
-              strong: ({ node, ...props }) => <strong className="font-bold text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-1 py-0.5 rounded" {...props} />,
-              p: ({ node, ...props }) => <p className="my-6 leading-relaxed text-gray-700 dark:text-gray-300" {...props} />,
-              blockquote: ({ node, ...props }) => (
+              strong: (props) => <strong className="font-bold text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-1 py-0.5 rounded" {...props} />,
+              p: (props) => <p className="my-6 leading-relaxed text-gray-700 dark:text-gray-300" {...props} />,
+              blockquote: (props) => (
                 <blockquote className="border-l-4 border-gradient-to-b from-blue-500 to-purple-500 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 pl-6 pr-4 py-4 italic my-8 rounded-r-lg" {...props} />
               ),
-              code: ({ node, ...props }) =>
+              code: (props) =>
                 <code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-sm font-mono text-purple-600 dark:text-purple-400" {...props} />
             }}
           >
@@ -318,36 +291,6 @@ export default function LessonContent({
           </ReactMarkdown>
         </div>
 
-        {/* Call-to-action amélioré */}
-        <div className="mt-16 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-blue-900/20 dark:via-purple-900/20 dark:to-pink-900/20 p-8 rounded-2xl border border-blue-200/50 dark:border-purple-700/50 shadow-xl">
-          <div className="flex flex-col lg:flex-row items-center justify-between">
-            <div className="text-center lg:text-left mb-6 lg:mb-0">
-              <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-2 flex items-center justify-center lg:justify-start">
-                <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-                </svg>
-                Félicitations !
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 text-lg">
-                Tu as terminé cette leçon. Prêt à découvrir la suite ?
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <button
-                onClick={onNextLesson}
-                className="px-8 py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-700 hover:via-purple-700 hover:to-pink-700 text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center"
-              >
-                Leçon suivante
-                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                </svg>
-              </button>
-              <button className="px-6 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium rounded-xl border-2 border-gray-300 dark:border-gray-600 hover:border-purple-400 dark:hover:border-purple-500 transition-all hover:shadow-md">
-                Revoir la leçon
-              </button>
-            </div>
-          </div>
-        </div>
       </article>
     </>
   );

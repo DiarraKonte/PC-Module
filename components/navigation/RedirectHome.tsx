@@ -9,8 +9,10 @@ export default function RedirectHome() {
 
   useEffect(() => {
     if(!isAuthenticated)
-    router.push('/');
-  }, [router]);
+      router.push('/');
+    else
+      router.push('/home');
+  }, [router, isAuthenticated]);
 
   return null; 
 }

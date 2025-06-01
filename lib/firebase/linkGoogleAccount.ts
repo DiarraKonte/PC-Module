@@ -15,9 +15,18 @@ export async function linkGoogleAccount() {
     const result = await linkWithPopup(currentUser, googleProvider);
     console.log("Compte Google lié :", result.user);
     return result.user;
-  } catch (error: any) {
-    if (error.code === 'auth/credential-already-in-use') {
-      console.error("Ce compte Google est déjà utilisé par un autre utilisateur.");
+  } catch (error: unknown) {
+    if (
+      typeof error === 'object' &&
+      error !== null &&
+      'code' in error &&
+      typeof (error as { code?: string }).code === 'string'
+    ) {
+      if ((error as { code: string }).code === 'auth/credential-already-in-use') {
+        console.error("Ce compte Google est déjà utilisé par un autre utilisateur.");
+      } else {
+        console.error("Erreur lors du linkage Google :", error);
+      }
     } else {
       console.error("Erreur lors du linkage Google :", error);
     }

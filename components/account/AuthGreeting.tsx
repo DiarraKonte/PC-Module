@@ -9,8 +9,8 @@ export function AuthGreeting() {
   if (!user?.displayName) return null;
 
   return (
-    <h2 className="text-3xl font-bold mb-6">
+    <h1 className="text-3xl font-bold mb-6">
       {user.displayName} !
-    </h2>
+    </h1>
   );
 }

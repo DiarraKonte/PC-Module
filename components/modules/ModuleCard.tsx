@@ -2,24 +2,20 @@
 import Link from 'next/link';
 import { useAuth } from '@/lib/AuthContext';
 import { useRouter } from 'next/navigation';
-import {Lock, Zap, Crown } from 'lucide-react';
+import {Zap, Crown } from 'lucide-react';
 
 export type ModuleCardProps = {
   slug: string;
   title: string;
   description: string;
-  image?: string;
   price?: number;
-  duration?: string;
 };
 
 export default function ModuleCard({ 
   slug, 
   title, 
   description, 
-  image,
   price = 0,
-  duration = "1h"
 }: ModuleCardProps) {
   const isFree = price === 0;
   const router = useRouter();
@@ -40,21 +36,6 @@ export default function ModuleCard({
         ? 'border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-400'
         : 'border-gray-300 dark:border-gray-600'
     }`}>
-      {image && (
-        <div className="relative h-40 w-full">
-          <img
-            src={image}
-            alt={title}
-            className={`w-full h-full object-cover ${!canAccess ? 'opacity-80' : ''}`}
-          />
-          {!canAccess && (
-            <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-              <Lock className="text-white w-8 h-8" />
-            </div>
-          )}
-        </div>
-      )}
-      
       <div className="p-5">
         <div className="flex justify-between items-start mb-3">
           <h2 className={`text-lg font-bold ${

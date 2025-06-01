@@ -19,7 +19,7 @@ export default function CancelPage() {
           </h1>
           
           <p className="mt-4 text-gray-600 dark:text-gray-300">
-            Votre paiement n'a pas été finalisé. Vous pouvez réessayer ou nous contacter si vous pensez qu'il s'agit d'une erreur.
+            Votre paiement n&apos;a pas été finalisé. Vous pouvez réessayer ou nous contacter si vous pensez qu&apos;il s&apos;agit d&apos;une erreur.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">

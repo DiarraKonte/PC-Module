@@ -11,7 +11,7 @@ import NavBar from '@/components/navigation/HomeNavBar';
 import { useAuth } from '@/lib/AuthContext'; 
 import { Crown } from 'lucide-react';
 import { linkGoogleAccount } from '@/lib/firebase/linkGoogleAccount'; 
-import Link from 'next/link';
+import { FirebaseError } from 'firebase/app';
 
 
 export default function AccountPage() {
@@ -93,9 +93,13 @@ export default function AccountPage() {
                   toast.success('Compte Google lié avec succès !');
                   const updatedUser = auth.currentUser;
                   setUser({ ...updatedUser } as User); 
-                } catch (error: any) {
-                  if (error.code === 'auth/credential-already-in-use') {
-                    toast.error("Ce compte Google est déjà lié à un autre utilisateur.");
+                } catch (error) {
+                  if (error instanceof FirebaseError) {
+                    if (error.code === 'auth/credential-already-in-use') {
+                      toast.error("Ce compte Google est déjà lié à un autre utilisateur.");
+                    } else {
+                      toast.error("Erreur lors du linkage du compte Google.");
+                    }
                   } else {
                     toast.error("Erreur lors du linkage du compte Google.");
                   }
@@ -117,19 +121,14 @@ export default function AccountPage() {
           <UpdateName user={user} />
           <UpdatePassword/>
 
-          <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 justify-center p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">Déconnexion</h2>
-            <p className="text-gray-600 dark:text-gray-300 mb-4">
-              Vous pouvez vous déconnecter à tout moment.
-            </p>
             <button
               onClick={handleLogout}
-              className="w-full sm:w-auto px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors"
+              className=" w-full sm:w-auto px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors"
             >
               Se déconnecter
             </button>
-
-            
           </div>
         </div>
       </main>

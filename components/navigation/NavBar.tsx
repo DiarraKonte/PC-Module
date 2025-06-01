@@ -14,7 +14,7 @@ export default function NavBar1() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  const { isAuthenticated, loading, logout } = useAuth();
+  const { isAuthenticated} = useAuth();
 
   const navLinks = [
     ...(isAuthenticated ? [{ name: 'Mon espace', href: '/home' }] : []),
@@ -27,12 +27,23 @@ export default function NavBar1() {
         <div className="container mx-auto px-4 py-3">
           {/* Barre principale */}
           <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                <Zap className="text-blue-500" />
+          <Link
+              href="/"
+              className="flex items-center gap-1 group select-none font-bold text-xl md:text-2xl tracking-tight"
+            >
+              {/* Lumn */}
+              <span className="bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600 bg-clip-text text-transparent group-hover:from-blue-500 group-hover:to-purple-500 transition-all duration-300">
+                Lumn
+              </span>
+              
+              {/* PC */}
+              <span className="text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex items-center">
+                PC
+                <span className="ml-1 opacity-70 group-hover:opacity-100 transition-opacity">
+                  <Zap className="w-4 h-4 text-blue-500 dark:text-blue-400" />
+                </span>
               </span>
             </Link>
-
             {/* Navigation desktop */}
             <nav className="hidden md:flex items-center justify-center gap-8 w-full">
               {navLinks.map((link) => (

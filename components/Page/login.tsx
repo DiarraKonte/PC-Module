@@ -2,8 +2,8 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Link from 'next/link';
-import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
-import { auth, googleProvider } from '@/lib/firebase/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '@/lib/firebase/firebase';
 import { Loader2, Zap } from 'lucide-react';
 import { toast } from 'react-hot-toast'; // Import de react-hot-toast
 import GoogleAuthButton from '../ui/button/GoogleAuth';
@@ -16,25 +16,8 @@ export default function LoginPage() {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState({
-    email: false,
-    google: false
+    email: false
   });
-
-  const handleGoogleLogin = async () => {
-    try {
-      setLoading(prev => ({ ...prev, google: true }));
-      setError('');
-      
-      await signInWithPopup(auth, googleProvider);
-      toast.success('Connexion réussie !'); // Message de succès
-      const redirectUrl = new URLSearchParams(window.location.search).get('redirect') || '/home';
-      router.push(redirectUrl);
-    } catch (err: any) {
-      setError(err.message || "Erreur lors de la connexion avec Google");
-    } finally {
-      setLoading(prev => ({ ...prev, google: false }));
-    }
-  };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,18 +35,17 @@ export default function LoginPage() {
       toast.success('Connexion réussie !'); 
       const redirectUrl = new URLSearchParams(window.location.search).get('redirect') || '/home';
       router.push(redirectUrl);
-    } catch (error: any) {
+    } catch(error : unknown) {
       const errorMessages = {
         'auth/user-not-found': "Aucun compte associé à cet email",
         'auth/wrong-password': "Mot de passe incorrect",
         'auth/invalid-email': "Email invalide",
-        'auth/user-disabled': "Compte désactivé",
         'auth/too-many-requests': "Trop de tentatives. Réessayez plus tard",
         'default': "Une erreur est survenue lors de la connexion"
       };
       
-      setError(errorMessages[error.code as keyof typeof errorMessages] || errorMessages.default);
-    } finally {
+      setError(errorMessages[(error as { code: string }).code as keyof typeof errorMessages] || errorMessages.default);
+    }finally {
       setLoading(prev => ({ ...prev, email: false }));
     }
   };

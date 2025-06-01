@@ -87,7 +87,7 @@ export async function POST(req: Request) {
         break;
         
       case "payment_intent.succeeded":
-        console.log("Payment intent réussi - ID:", (event.data.object as any).id);
+        console.log("Payment intent réussi - ID:", (event.data.object as Stripe.PaymentIntent).id);
         break;
         
       default:
