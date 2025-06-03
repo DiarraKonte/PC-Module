@@ -23,16 +23,16 @@ export default function MentionsLegales() {
             <ul className="list-disc pl-5 space-y-2">
               <li><strong>Nom :</strong> Konte</li>
               <li><strong>Statut :</strong> Auto-entrepreneur</li>
-              <li><strong>Nom commercial :</strong> LumnPC</li>
+              <li><strong>Nom commercial :</strong> Konte</li>
               <li><strong>Email :</strong> contact@lumnpc.fr</li>
-              <li><strong>Adresse :</strong> Paris, France</li>
-              <li><strong>SIRET :</strong> [à compléter]</li>
-              <li><strong>Date d'immatriculation :</strong> Juin 2025</li>
+              <li><strong>Adresse :</strong> Argenteuil, France</li>
+              <li><strong>SIRET :</strong> 91742552200013</li>
+              <li><strong>Date d&apos;immatriculation :</strong> Juillet 2022</li>
             </ul>
 
             <h2 className="text-xl font-semibold mt-6 mb-2">2. Responsable de publication</h2>
             <p>
-              Le responsable de la publication est <strong>Konte</strong>, gérant de l'activité.
+              Le responsable de la publication est <strong>Konte</strong>, gérant de l&apos;activité.
             </p>
 
             <h2 className="text-xl font-semibold mt-6 mb-2">3. Hébergeur du site</h2>
@@ -44,7 +44,7 @@ export default function MentionsLegales() {
 
             <h2 className="text-xl font-semibold mt-6 mb-2">4. Propriété intellectuelle</h2>
             <p>
-              L'ensemble des contenus présents sur ce site (textes, images, logos, vidéos) sont protégés par le Code de la propriété intellectuelle et appartiennent à Lumn PC ou à ses auteurs respectifs.
+              L&apos;ensemble des contenus présents sur ce site (textes, images, logos, vidéos) sont protégés par le Code de la propriété intellectuelle et appartiennent à Lumn PC ou à ses auteurs respectifs.
             </p>
 
             <h2 className="text-xl font-semibold mt-6 mb-2">5. Données personnelles</h2>

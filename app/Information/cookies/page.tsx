@@ -11,14 +11,14 @@ export default function PolitiqueCookies() {
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 py-16">
         <div className="bg-white dark:bg-gray-900 shadow-md dark:shadow-none border border-gray-200 dark:border-gray-800 rounded-lg p-6 md:p-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Politique d'utilisation des Cookies</h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Politique d&apos;utilisation des Cookies</h1>
 
           <section className="space-y-6 text-gray-700 dark:text-gray-300">
             <p>
-              Cette politique explique comment <strong>Lumn PC</strong> utilise les cookies et technologies similaires pour assurer le bon fonctionnement du site, analyser l’audience et améliorer votre expérience utilisateur.
+              Cette politique explique comment <strong>Lumn PC</strong> utilise les cookies et technologies similaires pour assurer le bon fonctionnement du site, analyser l&rsquo;audience et améliorer votre expérience utilisateur.
             </p>
 
-            <h2 className="text-xl font-semibold mt-6 mb-2">1. Qu'est-ce qu'un cookie ?</h2>
+            <h2 className="text-xl font-semibold mt-6 mb-2">1. Qu&#39;est-ce qu&#39;un cookie ?</h2>
             <p>
               Un cookie est un petit fichier texte déposé sur votre appareil par le site web que vous visitez. Il permet au site de se souvenir de vos actions et préférences pendant une durée déterminée.
             </p>
@@ -57,7 +57,7 @@ export default function PolitiqueCookies() {
               <li>Les options offertes par les tiers (Google, Facebook, etc.)</li>
             </ul>
             <p className="mt-2">
-              Pour plus d'informations sur les cookies tiers, rendez-vous sur :
+              Pour plus d&apos;informations sur les cookies tiers, rendez-vous sur :
               {' '}
               <a href="https://www.allaboutcookies.org/"  target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline dark:text-blue-400">
                 www.allaboutcookies.org
@@ -66,7 +66,7 @@ export default function PolitiqueCookies() {
 
             <h2 className="text-xl font-semibold mt-6 mb-2">6. Droits des utilisateurs</h2>
             <p>
-              Vous avez le droit d’accéder, de limiter, de supprimer ou de refuser les cookies, conformément au RGPD. Vos choix sont conservés grâce à un cookie de gestion du consentement.
+              Vous avez le droit d&rsquo;accéder, de limiter, de supprimer ou de refuser les cookies, conformément au RGPD. Vos choix sont conservés grâce à un cookie de gestion du consentement.
             </p>
 
             <h2 className="text-xl font-semibold mt-6 mb-2">7. Modification de la politique</h2>

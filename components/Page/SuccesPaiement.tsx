@@ -5,7 +5,6 @@ import NavBar from '@/components/navigation/HomeNavBar';
 import { CheckCircleIcon } from '@heroicons/react/24/outline';
 
 export default function SuccessPage() {
-  const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   const [verified, setVerified] = useState(false);
 
@@ -14,7 +13,6 @@ export default function SuccessPage() {
 
     if (hasVerified === 'true') {
       // Le paiement a déjà été vérifié
-      setLoading(false);
       setProgress(100);
       setVerified(true);
       return;
@@ -26,7 +24,6 @@ export default function SuccessPage() {
         setProgress((prev) => {
           if (prev >= 100) {
             clearInterval(interval);
-            setLoading(false);
             setVerified(true);
             localStorage.setItem('payment_verified', 'true'); // Marquer comme vérifié
             return 100;

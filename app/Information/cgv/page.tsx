@@ -41,7 +41,7 @@ export default function CGV() {
 
             <h2 className="text-xl font-semibold mt-6 mb-2">5. Garantie et remboursement</h2>
             <p>
-              Bien que nous mettions tout en œuvre pour garantir la qualité des modules, ils sont fournis "en l’état". 
+              Bien que nous mettions tout en œuvre pour garantir la qualité des modules, ils sont fournis &quot;en l’état&quot;. 
               Toutefois, nous pouvons accorder un remboursement dans les cas exceptionnels, sur demande à notre support.
             </p>
 

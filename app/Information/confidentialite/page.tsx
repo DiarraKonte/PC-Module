@@ -1,7 +1,6 @@
 'use client';
 
 import NavBar from '@/components/navigation/HomeNavBar';
-import Footer from '@/components/footer/Footer';
 
 export default function PolitiqueConfidentialite() {
   return (
@@ -53,14 +52,14 @@ export default function PolitiqueConfidentialite() {
               Conformément au RGPD, vous avez droit à :
             </p>
             <ul className="list-disc pl-5 space-y-2">
-              <li>Droit d'accès – obtenir une copie de vos données</li>
+              <li>Droit d&apos;accès – obtenir une copie de vos données</li>
               <li>Droit de rectification – corriger vos données</li>
-              <li>Droit à l'effacement – demander la suppression de vos données</li>
-              <li>Droit d’opposition – limiter l’utilisation de vos données</li>
+              <li>Droit à l&apos;effacement – demander la suppression de vos données</li>
+              <li>Droit d&apos;opposition – limiter l’utilisation de vos données</li>
             </ul>
             <p className="mt-2">
               Vous pouvez exercer ces droits en nous contactant via notre{' '}
-              <a href="/contact" className="text-blue-600 hover:underline dark:text-blue-400">
+              <a href="mailto:contact@lumnpc.fr" className="text-blue-600 hover:underline dark:text-blue-400">
                 page de contact
               </a>
               .

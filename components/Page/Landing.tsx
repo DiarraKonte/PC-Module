@@ -1,4 +1,4 @@
-import { ArrowRight, Zap, Check, Monitor, Star } from "lucide-react";
+import { ArrowRight, Check, Monitor } from "lucide-react";
 import Link from "next/link";
 
 const Home = () => {
@@ -57,7 +57,7 @@ const Home = () => {
               <div className="text-blue-500 mb-4">
                 <Monitor size={28} />
               </div>
-              <h3 className="text-xl font-bold mb-2">Trouve ce qu'il te faut</h3>
+              <h3 className="text-xl font-bold mb-2">Trouve ce qu&apos;il te faut</h3>
               <p className="text-gray-600 dark:text-gray-200">
                 Tu trouves en 30 secondes ce que tu cherches. Les modules sont à ton entière disposition.
               </p>
@@ -71,7 +71,7 @@ const Home = () => {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Reprends le contrôle de ton temps</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-700 dark:text-gray-200">
-            Nos modules te donnent l'essentiel, rapidement, sans chercher pendant des heures.
+            Nos modules te donnent l&apos;essentiel, rapidement, sans chercher pendant des heures.
           </p>
           <Link
             href="/module"

@@ -54,7 +54,7 @@ export default function ContactPage() {
                 href="/"
                 className="mt-4 inline-block text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline"
               >
-                Retour à l'accueil
+                Retour à l&apos;accueil
               </Link>
             </div>
           ) : (

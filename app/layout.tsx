@@ -33,9 +33,7 @@ export default function RootLayout({
           'overflow-x-hidden'
         )}
       >
-        {/* Layout principal */}
         <MainLayout>
-          {/* Transition globale entre les pages */}
           <PageTransition>{children}</PageTransition>
         </MainLayout>
       </body>

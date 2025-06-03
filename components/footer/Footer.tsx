@@ -50,7 +50,7 @@ export default function Footer() {
             <div>
             <ul className="space-y-2">
               <li><Link href="/Information/mentions-legales">Mentions légales</Link></li>
-              <li><Link href="/Information/cgu">Conditions d'utilisation</Link></li>
+              <li><Link href="/Information/cgu">Conditions d&apos;utilisation</Link></li>
               <li><Link href="/Information/cgv">Conditions de vente</Link></li>
               <li><Link href="/Information/confidentialite">Politique de confidentialité</Link></li>
               <li><Link href="/Information/cookies">Politique de cookies</Link></li>

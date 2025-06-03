@@ -11,11 +11,11 @@ export default function CGU() {
       {/* Page Content */}
       <main className="max-w-4xl mx-auto px-4 py-16">
         <div className="bg-white dark:bg-gray-900 shadow-md dark:shadow-none border border-gray-200 dark:border-gray-800 rounded-lg p-6 md:p-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Conditions Générales d'Utilisation (CGU)</h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Conditions Générales d&apos;Utilisation (CGU)</h1>
 
           <section className="space-y-6 text-gray-700 dark:text-gray-300">
             <p>
-              Bienvenue sur <strong>Lumn PC</strong>. En utilisant notre site web et nos services, vous acceptez ces Conditions Générales d’Utilisation. Veuillez les lire attentivement.
+              Bienvenue sur <strong>Lumn PC</strong>. En utilisant notre site web et nos services, vous acceptez ces Conditions Générales d&apos;Utilisation. Veuillez les lire attentivement.
             </p>
 
             <h2 className="text-xl font-semibold mt-6 mb-2">1. Objet des CGU</h2>
