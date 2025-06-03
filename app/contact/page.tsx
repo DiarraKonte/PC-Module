@@ -139,10 +139,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-4 text-center text-sm text-gray-500 dark:text-gray-400 border-t dark:border-gray-800">
-        &copy; {new Date().getFullYear()} PC World. Tous droits réservés.
-      </footer>
     </>
   );
 }

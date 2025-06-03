@@ -1,22 +1,23 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { cn } from "@/lib/utils";
-import { AuthProvider } from "@/lib/AuthContext";
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
+import './globals.css';
+import { cn } from '@/lib/utils';
+import MainLayout from '@/components/MainLayout';
+import PageTransition from '@/components/ui/PageTransition';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: "PC WORLD",
-  description: "Le configurateur PC ultime pour les gamers et les créateurs !",
+  title: 'Lumn PC',
+  description: 'Apprends à configurer ton PC gaming sans perdre ton temps.',
 };
 
 export default function RootLayout({
@@ -25,11 +26,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="fr">
       <body
-        className={cn(`${geistSans.variable} ${geistMono.variable} antialiased h-full m-auto `)}
+        className={cn(
+          `${geistSans.variable} ${geistMono.variable} antialiased h-full bg-white dark:bg-gray-900`,
+          'overflow-x-hidden'
+        )}
       >
-        <AuthProvider>{children}</AuthProvider>
+        {/* Layout principal */}
+        <MainLayout>
+          {/* Transition globale entre les pages */}
+          <PageTransition>{children}</PageTransition>
+        </MainLayout>
       </body>
     </html>
   );

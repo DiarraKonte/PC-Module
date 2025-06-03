@@ -99,10 +99,6 @@ export default function SuccessPage() {
           </div>
         </div>
       </main>
-
-      <footer className="py-4 text-center text-gray-500 dark:text-gray-400 text-sm bg-white dark:bg-gray-900 border-t dark:border-gray-800">
-        &copy; {new Date().getFullYear()} PC World. Tous droits réservés.
-      </footer>
     </>
   );
 }

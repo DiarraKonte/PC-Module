@@ -9,6 +9,7 @@ import ProtectedRoute from '@/components/Protected/PretotectedRoute';
 import Link from 'next/link';
 import { ArrowLeft, Home } from 'lucide-react';
 import React from 'react';
+import PageTransition from '@/components/ui/PageTransition';
 
 export default function ModulePage() {
   const params = useParams();
@@ -22,6 +23,7 @@ export default function ModulePage() {
 
   return (
     <ProtectedRoute isFree={isFree}>
+      <PageTransition>
       <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
         <NavBar />
         <div className="flex flex-1">
@@ -73,6 +75,7 @@ export default function ModulePage() {
           </main>
         </div>
       </div>
+      </PageTransition>
     </ProtectedRoute>
   );
 }

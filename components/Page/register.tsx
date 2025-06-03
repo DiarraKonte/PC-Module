@@ -273,11 +273,11 @@ export default function RegisterPage() {
 
         <div className="text-center text-xs text-gray-500 dark:text-gray-400">
           En vous inscrivant, vous acceptez nos{' '}
-          <Link href="/terms" className="text-blue-600 hover:text-blue-500 dark:text-blue-400 hover:underline">
+          <Link href="/Information/cgu" className="text-blue-600 hover:text-blue-500 dark:text-blue-400 hover:underline">
             Conditions d&apos;utilisation
           </Link>{' '}
           et notre{' '}
-          <Link href="/privacy" className="text-blue-600 hover:text-blue-500 dark:text-blue-400 hover:underline">
+          <Link href="/Information/confidentialite" className="text-blue-600 hover:text-blue-500 dark:text-blue-400 hover:underline">
             Politique de confidentialité
           </Link>
         </div>

@@ -60,7 +60,7 @@ export default function LessonPage({
       transition={{ duration: 0.5 }}
       className="flex flex-col min-h-screen"
     >
-      <NavBar />
+      <NavBar/>
 
       {/* Bouton menu mobile */}
       {isMobile && <MobileMenuButton />}
