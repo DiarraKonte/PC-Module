@@ -38,14 +38,6 @@ Cette capacité à faire des **milliers de calculs EN MÊME TEMPS** le rend imba
 Au début, c'était "juste" pour les graphismes. Mais les petits malins ont vite compris que cette puissance de calcul parallèle pouvait servir à bien plus ! C'est ce qu'on appelle le **GPGPU** (General-Purpose computing on GPUs).
 Et BAM ! Le GPU est devenu une star de l'innovation. ✨
 
-## CPU vs GPU : Le Duo Imbattable
-
-| Caractéristique          | CPU (Le Cerveau Malin) 🧠        | GPU (L'Armée de Calculateurs) 💪    |
-|--------------------------|-----------------------------------|---------------------------------------|
-| **Nombre de Cœurs**     | Peu (4 à 32 cœurs très puissants) | Énormément (des centaines à des milliers !) |
-| **Type de Tâches**       | Générales, complexes, une par une | Spécifiques, simples, en masse !     |
-| **Rôle Principal**       | Diriger l'ordi, faire tourner le système | Accélérer graphismes & calculs lourds |
-
 > **En résumé :** Le CPU est le chef d'orchestre. Le GPU, c'est l'orchestre symphonique qui envoie la sauce ! 🎶
 
 ## Les Différents Costumes du GPU
@@ -171,7 +163,7 @@ C'est un peu comme si ton boulanger préféré se mettait à faire des gâteaux 
 
 ## Intel Arc (Série A "Alchemist") : C'est Quoi ?
 
-*   **Arc A3xx (ex: A380) :** L'entrée de gamme, pour jouer léger et créer un peu.
+*   **Arc A3xx (ex: A380) :** L'entrée de gamme, pour jouer léger et créer un peu.(Que l'on ne conseille car il y a beaucoup mieux chez AMD et NVIDIA)
 *   **Arc A5xx (ex: A580) :** Le milieu de gamme.
 *   **Arc A7xx (ex: A750, A770) :** Le "top" de cette première génération. Ils visent le milieu de gamme de NVIDIA et AMD.
 

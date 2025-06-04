@@ -1,10 +1,9 @@
-// modules/carte-mere/data.ts
 export default {
     meta: {
       slug: "carte-mere-le-squelette-de-ton-pc-guide-de-choix",
       title: "Carte Mère : Choisis le Squelette Idéal de Ton PC !",
       description: "Socket, chipset, format (ATX, Micro-ATX, ITX), connectique, VRM... Apprends à décrypter les secrets des cartes mères et à choisir celle qui accueillera parfaitement tes composants pour un PC stable et performant.",
-      price: 1, // Ou 0 si gratuit
+      price: 1, 
     },
     lessons: [
       {
@@ -396,7 +395,7 @@ export default {
   Tu trouveras forcément la carte mère qui sera la fondation parfaite pour ton PC !
   C'est un composant que tu garderas probablement longtemps, alors prends le temps de bien choisir.
   
-  Bonne construction et que ton PC soit stable comme un roc ! 🚀
+  A plus dans le module suivant !
         `,
       },
     ],

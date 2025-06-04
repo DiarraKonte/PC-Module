@@ -58,7 +58,7 @@ export default function MentionsLegales() {
 
             <h2 className="text-xl font-semibold mt-6 mb-2">6. Liens externes</h2>
             <p>
-              Ce site peut contenir des liens vers d’autres sites internet. Lumn PC ne partage pas vos données avec ces tiers et décline toute responsabilité quant à leur contenu.
+              Ce site peut contenir des liens vers d&apos;autres sites internet. Lumn PC ne partage pas vos données avec ces tiers et décline toute responsabilité quant à leur contenu.
             </p>
 
             <p className="mt-6 text-sm text-gray-500 dark:text-gray-400">

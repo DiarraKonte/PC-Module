@@ -12,6 +12,7 @@ import {
   PORTABLE_MODULES,
   IntroPC,
   ALIMENTATION_MODULES,
+  MONTAGE_MODULES,
 } from '@/modules';
 import { ArrowRight, BookOpen } from 'lucide-react';
 
@@ -22,6 +23,7 @@ const categories = [
   { name: 'CPU', modules: CPU_MODULES },
   { name: 'RAM', modules: RAM_STORAGE_MODULES },
   { name: 'Alimentation', modules: ALIMENTATION_MODULES },
+  { name: 'Montage', modules: MONTAGE_MODULES },
   { name: 'Système d’exploitation', modules: OS_MODULES },
   { name: 'Ventilation & Refroidissement', modules: VENTILATION_MODULES },
   { name: 'PC Portable', modules: PORTABLE_MODULES },

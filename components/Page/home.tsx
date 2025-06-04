@@ -10,6 +10,7 @@ import {
   CPU_MODULES,
   RAM_STORAGE_MODULES,
   ALIMENTATION_MODULES,
+  MONTAGE_MODULES,
   OS_MODULES,
   PORTABLE_MODULES,
   PERIPHERIQUE_MODULES,
@@ -45,6 +46,10 @@ export default function HomePage() {
     {
       title: 'Alimentation (PSU)',
       modules: ALIMENTATION_MODULES,
+    },
+    {
+      title: 'Montage',
+      modules: MONTAGE_MODULES,
     },
       {
       title: 'Systèmes d\'exploitation (OS)',

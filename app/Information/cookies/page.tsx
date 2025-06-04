@@ -66,12 +66,12 @@ export default function PolitiqueCookies() {
 
             <h2 className="text-xl font-semibold mt-6 mb-2">6. Droits des utilisateurs</h2>
             <p>
-              Vous avez le droit d&rsquo;accéder, de limiter, de supprimer ou de refuser les cookies, conformément au RGPD. Vos choix sont conservés grâce à un cookie de gestion du consentement.
+              Vous avez le droit d&apos;accéder, de limiter, de supprimer ou de refuser les cookies, conformément au RGPD. Vos choix sont conservés grâce à un cookie de gestion du consentement.
             </p>
 
             <h2 className="text-xl font-semibold mt-6 mb-2">7. Modification de la politique</h2>
             <p>
-              Nous pouvons mettre à jour cette politique en cas d’évolution des réglementations ou de nos outils. Les modifications s’appliquent dès leur publication.
+              Nous pouvons mettre à jour cette politique en cas d&apos;évolution des réglementations ou de nos outils. Les modifications s&apos;appliquent dès leur publication.
             </p>
 
             <p className="mt-6 text-sm text-gray-500 dark:text-gray-400">

@@ -19,9 +19,12 @@ import optimisation from './optimisastion/data';
 import alimentation from './alimentation/data';
 import cartemere from './cartemere/data';
 import stockage from './Stockage/data';
+import montage from './montage/data';
+import premonter from './Premonter/data';
 
 export const IntroPC = {
   [intro.meta.slug]: intro,
+  [premonter.meta.slug]: premonter,
 }
 
 export const CartemerePC = {
@@ -47,6 +50,10 @@ export const RAM_STORAGE_MODULES = {
 
 export const ALIMENTATION_MODULES = {
   [alimentation.meta.slug]: alimentation,
+};
+
+export const MONTAGE_MODULES = {
+  [montage.meta.slug]: montage,
 };
 
 export const OS_MODULES = {
@@ -81,6 +88,7 @@ export const ALL_MODULES = {
   ...CPU_MODULES,
   ...RAM_STORAGE_MODULES,
   ...ALIMENTATION_MODULES,
+  ...MONTAGE_MODULES,
   ...OS_MODULES,
   ...PORTABLE_MODULES,
   ...VENTILATION_MODULES,
