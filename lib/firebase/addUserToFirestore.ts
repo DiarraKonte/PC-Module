@@ -8,12 +8,12 @@ interface UserData {
   provider?: string;
 }
 
-export async function addUserToFirestore(user: UserData) {
+export async function addUserToFirestore(user: UserData): Promise<boolean> {
   const userRef = doc(db, 'users', user.uid);
-
   const userSnap = await getDoc(userRef);
+  const isNewUser = !userSnap.exists();
   let hasPremiumAccess = false;
-  if (userSnap.exists() && userSnap.data().hasPremiumAccess !== undefined) {
+  if (!isNewUser && userSnap.data().hasPremiumAccess !== undefined) {
     hasPremiumAccess = userSnap.data().hasPremiumAccess;
   }
 
@@ -26,4 +26,6 @@ export async function addUserToFirestore(user: UserData) {
     lastLogin: serverTimestamp(),
     provider: user.provider || 'email',
   }, { merge: true });
+
+  return isNewUser;
 }

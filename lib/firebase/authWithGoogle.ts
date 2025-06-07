@@ -8,14 +8,14 @@ export async function authWithGoogle() {
     const user = result.user;
     
     // Sauvegarde dans Firestore
-    await addUserToFirestore({
+    const isNewUser = await addUserToFirestore({
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
       provider: 'google',
     });
 
-    return user;
+    return { user, isNewUser };
   } catch (error) {
     console.error("Erreur lors de l'authentification Google:", error);
     throw error;

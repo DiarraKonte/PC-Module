@@ -21,10 +21,15 @@ import cartemere from './cartemere/data';
 import stockage from './Stockage/data';
 import montage from './montage/data';
 import premonter from './Premonter/data';
+import boitier from './boitier/data';
 
 export const IntroPC = {
   [intro.meta.slug]: intro,
   [premonter.meta.slug]: premonter,
+}
+
+export const boitierPC = {
+  [boitier.meta.slug]: boitier,
 }
 
 export const CartemerePC = {
@@ -41,11 +46,13 @@ export const CPU_MODULES = {
     [CPUchoisir.meta.slug]: CPUchoisir,
     [CPUcooling.meta.slug]: CPUcooling,
 };
+export const STORAGE_MODULES = {
+    [stockage.meta.slug]: stockage,
+};
 
-export const RAM_STORAGE_MODULES = {
+export const RAM_MODULES = {
   [Ram.meta.slug]: Ram,
   [choixRam.meta.slug]: choixRam,
-  [stockage.meta.slug]: stockage,
 };
 
 export const ALIMENTATION_MODULES = {
@@ -83,10 +90,12 @@ export const Bonus_MODULES = {
 
 export const ALL_MODULES = {
   ...IntroPC,
+  ...boitierPC,
   ...CartemerePC,
   ...GPU_MODULES,
   ...CPU_MODULES,
-  ...RAM_STORAGE_MODULES,
+  ...STORAGE_MODULES,
+  ...RAM_MODULES,
   ...ALIMENTATION_MODULES,
   ...MONTAGE_MODULES,
   ...OS_MODULES,

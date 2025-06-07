@@ -5,10 +5,12 @@ import { AuthGreeting } from '../account/AuthGreeting';
 import ModuleCategoryCard from '@/components/modules/ModuleCategoryCard';
 import {
   IntroPC,
+  boitierPC,
   CartemerePC,
   GPU_MODULES,
   CPU_MODULES,
-  RAM_STORAGE_MODULES,
+  STORAGE_MODULES,
+  RAM_MODULES,
   ALIMENTATION_MODULES,
   MONTAGE_MODULES,
   OS_MODULES,
@@ -16,6 +18,7 @@ import {
   PERIPHERIQUE_MODULES,
   VENTILATION_MODULES,
   Bonus_MODULES,
+
 } from '@/modules';
 import { useAuth } from '@/lib/AuthContext';
 import { Crown } from 'lucide-react';
@@ -26,6 +29,10 @@ export default function HomePage() {
     {
       title: 'Introduction',
       modules: IntroPC,
+    },
+    {
+      title: 'Boitier',
+      modules: boitierPC,
     },
     {
       title: 'Carte-mère',
@@ -40,8 +47,12 @@ export default function HomePage() {
       modules: GPU_MODULES,
     },
     {
-      title: 'Stockage (SSD, HDD, NVMe) et Mémoire vive (RAM)',
-      modules: RAM_STORAGE_MODULES,
+      title: 'Stockage (SSD, HDD, NVMe) ',
+      modules: STORAGE_MODULES,
+    },
+    {
+      title: 'Mémoire vive (RAM)',
+      modules: RAM_MODULES,
     },
     {
       title: 'Alimentation (PSU)',

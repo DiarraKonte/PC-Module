@@ -1,5 +1,5 @@
 // app/api/contact/route.ts
-import { Resend } from 'resend';
+import {Resend} from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -7,11 +7,11 @@ export async function POST(req: Request) {
   const { name, email, subject, message } = await req.json();
 
   try {
-    const data = await resend.emails.send({
-      from: 'Contact LumnPC <onboarding@resend.dev>',
-      to: 'ton.email@tondomaine.fr', // ton email de réception
+    await resend.emails.send({
+      from: 'Contact LumnPC <no-reply@lumnpc.fr>',
+      to: 'diarrakontepro@gmail.com',
       subject: `[${subject}] Nouveau message de ${name}`,
-      reply_to: email,
+      replyTo: email,
       html: `
         <h2>Nouveau message depuis le formulaire de contact</h2>
         <p><strong>Nom:</strong> ${name}</p>

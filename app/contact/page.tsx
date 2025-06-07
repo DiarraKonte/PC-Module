@@ -20,11 +20,26 @@ export default function ContactPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Formulaire soumis :', formData);
-    setSubmitted(true);
-    // Ici tu peux envoyer les données via une API ou service comme Formspree, Resend, etc.
+  
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+  
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        const error = await res.json();
+        alert('Erreur lors de l’envoi : ' + error?.message || 'Inconnue');
+      }
+    } catch (error) {
+      console.error('Erreur côté client :', error);
+      alert('Une erreur est survenue.');
+    }
   };
 
   return (
