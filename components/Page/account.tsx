@@ -119,13 +119,11 @@ export default function AccountPage() {
           <DisplayUser user={user} />
         </section>
 
-        {/* Mise à jour des infos */}
         <section className="space-y-6">
           <UpdateName user={user} />
           <UpdatePassword />
         </section>
 
-        {/* Actions finales */}
         <section className="mt-8">
           <div className="grid grid-cols-1 gap-4">
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
