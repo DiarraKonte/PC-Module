@@ -9,8 +9,8 @@ export default function Pricing() {
 
   const plan = {
     name: 'Accès à vie',
-    price: '19€',
-    originalPrice: '39€',
+    price: '9€',
+    originalPrice: '19€',
     description: 'Un paiement unique pour débloquer tous les modules.',
     features: [
       'Accès complet à tous les modules',
