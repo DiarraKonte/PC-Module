@@ -36,7 +36,7 @@ export default function Footer() {
               <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Contact</h3>
               <ul className="space-y-2">
                 <li className="text-sm text-gray-600 dark:text-gray-300">
-                  contact@lumnpc.fr
+                  diarrakontepro@gmail.com                
                 </li>
                 <li>
                   <Link href="/contact" className="text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors">

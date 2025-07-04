@@ -1,9 +1,6 @@
 import { auth, googleProvider } from './firebase';
 import { linkWithPopup } from 'firebase/auth';
 
-/**
- * Lie un compte Google au compte actuellement connecté
- */
 export async function linkGoogleAccount() {
   const currentUser = auth.currentUser;
   
