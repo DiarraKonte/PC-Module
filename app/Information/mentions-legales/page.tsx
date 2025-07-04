@@ -24,7 +24,7 @@ export default function MentionsLegales() {
               <li><strong>Nom :</strong> Konte</li>
               <li><strong>Statut :</strong> Auto-entrepreneur</li>
               <li><strong>Nom commercial :</strong> Konte</li>
-              <li><strong>Email :</strong> contact@lumnpc.fr</li>
+              <li><strong>Email :</strong> diarrakontepro@gmail.com</li>
               <li><strong>Adresse :</strong> Argenteuil, France</li>
               <li><strong>SIRET :</strong> 91742552200013</li>
               <li><strong>Date d&apos;immatriculation :</strong> Juillet 2022</li>
